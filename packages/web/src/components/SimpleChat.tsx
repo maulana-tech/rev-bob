@@ -49,8 +49,9 @@ export default function SimpleChat() {
     setLoading(true);
 
     try {
-      // Use backend proxy which will fallback to mock
-      const response = await fetch('http://localhost:3001/api/orchestrate-proxy/chat', {
+      // Use backend proxy which will fallback to NVIDIA AI or mock
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://devtoolsbackend-production.up.railway.app';
+      const response = await fetch(`${apiUrl}/api/orchestrate-proxy/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
