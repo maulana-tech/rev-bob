@@ -841,6 +841,19 @@ function resolveGraphData(fallbackGraph?: GraphData | null): GraphData | null {
   return getGraph() || fallbackGraph || null;
 }
 
+function extractJSON(text: string): string {
+  let cleaned = text.replace(/```json\n?|```/g, "").trim();
+  
+  const firstBrace = cleaned.indexOf('{');
+  const lastBrace = cleaned.lastIndexOf('}');
+  
+  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+    cleaned = cleaned.slice(firstBrace, lastBrace + 1);
+  }
+  
+  return cleaned;
+}
+
 app.use(cors({
   origin: [
     "http://localhost:3000",
@@ -929,7 +942,7 @@ You MUST respond with ONLY valid JSON, no markdown, no backticks:
     }
 
     try {
-      const jsonStr = text.replace(/```json\n?|```/g, "").trim();
+      const jsonStr = extractJSON(text);
       const parsed = JSON.parse(jsonStr);
       res.json({
         explanation: parsed.explanation || "No explanation provided.",
@@ -1081,7 +1094,7 @@ Rules:
     console.log('[Processes] LLM response received');
 
     try {
-      const jsonStr = text.content.replace(/```json\n?|```/g, "").trim();
+      const jsonStr = extractJSON(text.content);
       const parsed = JSON.parse(jsonStr);
       const processes = sanitizeProcesses(
         parsed.processes,
