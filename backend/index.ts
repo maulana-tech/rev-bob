@@ -1010,9 +1010,12 @@ app.post("/api/processes", async (req, res) => {
     return;
   }
 
+  console.log(`[Processes] Request for graph: ${graphData.nodes.length} nodes, ${graphData.edges.length} edges`);
+
   try {
     const summary = buildCompactGraphSummary(graphData);
     const allowedLabels = new Set(graphData.nodes.map((node) => node.label));
+    console.log(`[Processes] Graph summary built, ${allowedLabels.size} unique labels`);
     const systemPrompt = `You are an expert software architect with deep reasoning capabilities.
 You have been given a complete dependency graph of a real codebase.
 
@@ -1066,9 +1069,16 @@ Rules:
 - Never return empty processes array
 - Mermaid syntax must be valid graph TD format`;
 
-    const text = await callLLM(systemPrompt, `GRAPH DATA:\n${summary}`, {
-      maxTokens: 4096,
-    });
+    console.log('[Processes] Calling LLM for process detection...');
+    const text = await Promise.race([
+      callLLM(systemPrompt, `GRAPH DATA:\n${summary}`, {
+        maxTokens: 4096,
+      }),
+      new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error('Process detection timed out after 90 seconds')), 90000)
+      )
+    ]);
+    console.log('[Processes] LLM response received');
 
     try {
       const jsonStr = text.content.replace(/```json\n?|```/g, "").trim();
@@ -2034,6 +2044,34 @@ app.get('/health', (_req, res) => {
 // Mount DevTools AI Suite routes
 app.use('/api', devtoolsRoutes);
 app.use('/api', orchestrateProxyRoutes);
+
+// Global error handler - ensures CORS headers on errors
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error('[Error Handler]', err);
+
+  // Set CORS headers explicitly on error
+  const origin = req.headers.origin;
+  const allowedOrigins = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "https://rev-bob.vercel.app",
+    "https://rev-bob-lanaas-projects.vercel.app",
+    "https://rev-ck2qfgbge-lanaas-projects.vercel.app"
+  ];
+
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
+
+  const status = err.status || 500;
+  const message = err.message || 'Internal server error';
+
+  res.status(status).json({
+    error: message,
+    ...(process.env.NODE_ENV !== 'production' && { stack: err.stack })
+  });
+});
 
 // Cleanup expired report cache every 5 minutes
 setInterval(() => {

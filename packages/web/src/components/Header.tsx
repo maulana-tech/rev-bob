@@ -36,7 +36,6 @@ export default function Header({
         <header className="header">
             <div className="header-section header-section-left">
                 <div className="header-brand">
-                    <img src="/app/logo.png" alt="Rev BOB" className="header-logo" />
                     <span className="header-brand-wordmark">Rev BOB</span>
                 </div>
 
