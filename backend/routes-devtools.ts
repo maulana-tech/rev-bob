@@ -984,6 +984,29 @@ router.get('/jira/project/:key', async (req, res) => {
 });
 
 /**
+ * GET /api/jira/project/:key/issuetypes
+ * Get valid issue types for a project
+ */
+router.get('/jira/project/:key/issuetypes', async (req, res) => {
+  try {
+    if (!isJiraConfigured()) {
+      return res.status(500).json({ error: 'Jira not configured' });
+    }
+
+    const client = getJiraClient();
+    const issueTypes = await client.getIssueTypes(req.params.key);
+
+    res.json({
+      status: 'success',
+      issueTypes,
+    });
+  } catch (error: any) {
+    console.error('Error fetching issue types:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
  * POST /api/jira/search
  * Search issues using JQL
  */

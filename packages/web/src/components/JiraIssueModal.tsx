@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { getJiraStatus, getJiraProjects, createJiraIssue, type CreateJiraIssuePayload, type JiraProject } from '../lib/api';
+import { getJiraStatus, getJiraProjects, getJiraIssueTypes, createJiraIssue, type CreateJiraIssuePayload, type JiraProject, type JiraIssueType } from '../lib/api';
 
 interface JiraIssueModalProps {
     isOpen: boolean;
@@ -12,6 +12,7 @@ interface JiraIssueModalProps {
 export default function JiraIssueModal({ isOpen, onClose, defaultSummary = '', defaultDescription = '' }: JiraIssueModalProps) {
     const [loading, setLoading] = useState(false);
     const [projects, setProjects] = useState<JiraProject[]>([]);
+    const [issueTypes, setIssueTypes] = useState<JiraIssueType[]>([]);
     const [configured, setConfigured] = useState(false);
     const [jiraHost, setJiraHost] = useState<string>('');
     const [error, setError] = useState<string | null>(null);
@@ -22,7 +23,7 @@ export default function JiraIssueModal({ isOpen, onClose, defaultSummary = '', d
         project: '',
         summary: defaultSummary,
         description: defaultDescription,
-        issuetype: 'Task',
+        issuetype: '',
         priority: 'Medium',
     });
 
@@ -39,6 +40,27 @@ export default function JiraIssueModal({ isOpen, onClose, defaultSummary = '', d
             description: defaultDescription,
         }));
     }, [defaultSummary, defaultDescription]);
+
+    const loadIssueTypes = async (projectKey: string) => {
+        try {
+            const types = await getJiraIssueTypes(projectKey);
+            setIssueTypes(types);
+            const firstType = types[0]?.name || '';
+            setFormData((prev) => ({ ...prev, issuetype: firstType }));
+        } catch (err) {
+            console.error('[Jira] Failed to load issue types:', err);
+            setIssueTypes([
+                { id: '1', name: 'Task' },
+                { id: '2', name: 'Bug' },
+            ]);
+        }
+    };
+
+    useEffect(() => {
+        if (formData.project) {
+            loadIssueTypes(formData.project);
+        }
+    }, [formData.project]);
 
     const loadJiraData = async () => {
         try {
@@ -157,11 +179,13 @@ export default function JiraIssueModal({ isOpen, onClose, defaultSummary = '', d
                                     value={formData.issuetype}
                                     onChange={(e) => setFormData({ ...formData, issuetype: e.target.value })}
                                     disabled={loading}
+                                    required
                                 >
-                                    <option value="Task">Task</option>
-                                    <option value="Bug">Bug</option>
-                                    <option value="Story">Story</option>
-                                    <option value="Epic">Epic</option>
+                                    {issueTypes.map((type) => (
+                                        <option key={type.id} value={type.name}>
+                                            {type.name}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
 

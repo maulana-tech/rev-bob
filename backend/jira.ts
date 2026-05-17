@@ -144,6 +144,17 @@ class JiraClient {
   }
 
   /**
+   * Get issue types for a project
+   */
+  async getIssueTypes(projectKey: string): Promise<Array<{ id: string; name: string; description?: string }>> {
+    const types = await this.request<Array<{ id: string; name: string; description?: string }>>(
+      `/project/${projectKey}/issuetypes`,
+      { method: 'GET' }
+    );
+    return types.filter(t => t.name !== 'Sub-task');
+  }
+
+  /**
    * Search issues using JQL
    */
   async searchIssues(jql: string, maxResults: number = 50): Promise<{

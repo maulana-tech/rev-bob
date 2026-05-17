@@ -429,6 +429,25 @@ export async function getJiraProjects(): Promise<{ projects: JiraProject[]; tota
     return { projects: data.projects || [], total: data.total || 0 };
 }
 
+export interface JiraIssueType {
+    id: string;
+    name: string;
+    description?: string;
+}
+
+export async function getJiraIssueTypes(projectKey: string): Promise<JiraIssueType[]> {
+    const res = await fetchFromApi(`${BASE}/jira/project/${projectKey}/issuetypes`, {
+        method: 'GET',
+    });
+
+    if (!res.ok) {
+        throw await buildApiError(res);
+    }
+
+    const data = await res.json();
+    return data.issueTypes || [];
+}
+
 export async function createJiraIssue(payload: CreateJiraIssuePayload): Promise<JiraIssue> {
     const res = await fetchFromApi(`${BASE}/jira/issue`, {
         method: 'POST',
