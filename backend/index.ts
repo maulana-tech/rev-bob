@@ -22,6 +22,7 @@ import { parseGitHubRepoUrl, listFiles, getFileContent, updateFile, createBranch
 import devtoolsRoutes from "./routes-devtools";
 import orchestrateProxyRoutes from "./routes-orchestrate-proxy";
 import { getWatsonxClient, isWatsonxConfigured } from "./watsonx";
+import { getNvidiaAIClient, isNvidiaAIConfigured } from "./nvidia-ai";
 
 // ESM equivalent of __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -155,8 +156,8 @@ function hasValidWatsonxApiKey(): boolean {
   return isWatsonxConfigured();
 }
 
-function getActiveProviderOrder(): Array<"glm" | "asione" | "cerebras" | "watsonx"> {
-  return ["glm", "asione", "cerebras", "watsonx"];
+function getActiveProviderOrder(): Array<"nvidia" | "glm" | "asione" | "cerebras" | "watsonx"> {
+  return ["nvidia", "glm", "asione", "cerebras", "watsonx"];
 }
 
 function isLLMProviderKey(value: string): value is LLMProviderKey {
@@ -223,7 +224,18 @@ export async function callLLM(
     ? `${systemPrompt.trim()}\n\n${userMessage}`
     : userMessage;
 
-  const providerMap: Record<"glm" | "groq" | "cerebras" | "asione" | "watsonx", LLMProvider> = {
+  const providerMap: Record<"nvidia" | "glm" | "groq" | "cerebras" | "asione" | "watsonx", LLMProvider> = {
+    nvidia: {
+      name: "NVIDIA AI",
+      isConfigured: isNvidiaAIConfigured(),
+      call: async () => {
+        const client = getNvidiaAIClient();
+        return await client.chat(systemPrompt, userMessage, {
+          maxTokens: options.maxTokens ?? 2048,
+          temperature: options.primaryTemperature ?? 0.7,
+        });
+      },
+    },
     glm: {
       name: "GLM-5",
       isConfigured: hasValidGlmApiKey(),
