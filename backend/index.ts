@@ -42,6 +42,8 @@ const MAX_TOTAL_SOURCE_BYTES = 25 * 1024 * 1024;
 const MAX_UPLOAD_BYTES = 500 * 1024 * 1024;
 const GITHUB_DOWNLOAD_TIMEOUT_MS = 30_000;
 const fileCache = new Map<string, string>();
+const reportCache = new Map<string, { report: string; timestamp: number }>();
+const REPORT_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
 interface ProcessDefinition {
   name: string;
@@ -1112,47 +1114,42 @@ app.post("/api/report", async (req, res) => {
   }
 
   try {
+    // Generate cache key from graph structure
+    const cacheKey = `${graphData.nodes.length}-${graphData.edges.length}`;
+    const cached = reportCache.get(cacheKey);
+
+    // Return cached report if valid
+    if (cached && Date.now() - cached.timestamp < REPORT_CACHE_TTL) {
+      console.log('[Report] Returning cached report');
+      res.json({ report: cached.report });
+      return;
+    }
+
     const summary = buildCompactGraphSummary(graphData);
     const stats = computeReportStats(graphData);
-    const systemPrompt = `You are a senior software architect. Analyze this codebase knowledge graph and generate a comprehensive intelligence report.
-Use extended reasoning to deeply analyze this codebase.
-Think step by step before writing each section.
-
-Respond in clean markdown format with these exact sections:
+    const systemPrompt = `Generate codebase intelligence report in markdown. Be concise, technical, specific.
 
 # Codebase Intelligence Report
 
 ## Executive Summary
-2-3 sentences describing what this project does and its overall architecture.
+2-3 sentences: what this project does, overall architecture.
 
 ## Architecture Overview
-Describe the main architectural pattern, key layers, and how they interact.
-Reference specific files and their roles.
+Main pattern, key layers, file interactions. Reference actual nodes.
 
-## Component Breakdown
-For each major file/component: what it does, what it depends on,
-what depends on it.
-
-## Dependency Hotspots
-Top 5 most connected nodes - these are the riskiest to change.
-Format as: **filename** - N connections - why it matters
+## Top 5 Dependency Hotspots
+**filename** - N connections - why risky
 
 ## Risk Assessment
-Which parts of the codebase are most fragile? What would cause
-the most damage if changed? Be specific with file names.
+Most fragile parts, what breaks if changed. Specific file names.
 
-## Onboarding Guide
-If a new developer joined today, what 5 files should they read first
-and in what order? Why?
+## Onboarding Path
+5 files to read first, in order, with why.
 
-## Quick Stats
-- Total files parsed
-- Total functions detected
-- Most connected component
-- Deepest dependency chain
+## Stats
+Use provided stats exactly.
 
-Only reference nodes that actually exist in the provided graph.
-Be specific, technical, and useful. Write like a senior engineer.`;
+Reference only nodes from graph. Write like senior engineer.`;
 
     const text = await callLLM(
       systemPrompt,
@@ -1163,7 +1160,13 @@ Be specific, technical, and useful. Write like a senior engineer.`;
       },
     );
 
-    res.json({ report: text.content.trim() });
+    const report = text.content.trim();
+
+    // Cache the report
+    reportCache.set(cacheKey, { report, timestamp: Date.now() });
+    console.log('[Report] Cached new report');
+
+    res.json({ report });
   } catch (err: unknown) {
     console.error("Report generation error:", err);
     const message = err instanceof Error ? err.message : "Unknown error";
@@ -2031,6 +2034,21 @@ app.get('/health', (_req, res) => {
 // Mount DevTools AI Suite routes
 app.use('/api', devtoolsRoutes);
 app.use('/api', orchestrateProxyRoutes);
+
+// Cleanup expired report cache every 5 minutes
+setInterval(() => {
+  const now = Date.now();
+  let cleaned = 0;
+  for (const [key, value] of reportCache.entries()) {
+    if (now - value.timestamp > REPORT_CACHE_TTL) {
+      reportCache.delete(key);
+      cleaned++;
+    }
+  }
+  if (cleaned > 0) {
+    console.log(`[Cache] Cleaned ${cleaned} expired report(s)`);
+  }
+}, 5 * 60 * 1000);
 
 const portNumber = typeof PORT === 'string' ? parseInt(PORT, 10) : PORT;
 const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
