@@ -1,135 +1,252 @@
-# DevTools AI Suite
+# Rev BOB - Structural Refactor Engine
 
-> Interactive Structural Code Intelligence & Safe Refactor Simulation  
-> Powered by Multi-LLM Orchestration (Claude, GPT, Groq, Cerebras, Gemini)
+> AI-Powered Code Intelligence & Visual Impact Analysis  
+> Powered by IBM Watson AI & NVIDIA AI | Built for IBM BOB Hackathon 2025
 
+[![IBM Watson](https://img.shields.io/badge/IBM_Watson-AI-0F62FE?style=flat&logo=ibm)](https://www.ibm.com/watson)
+[![NVIDIA](https://img.shields.io/badge/NVIDIA-AI-76B900?style=flat&logo=nvidia)](https://www.nvidia.com/en-us/ai/)
 [![Vite](https://img.shields.io/badge/Vite-5.2-646CFF?style=flat&logo=vite)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Express](https://img.shields.io/badge/Express-4.18-000000?style=flat&logo=express)](https://expressjs.com/)
-[![Sigma.js](https://img.shields.io/badge/Sigma.js-3.0-FF6600?style=flat)](https://www.sigmajs.org/)
 
 ## 🎯 Overview
 
-DevTools AI Suite is a powerful code analysis platform that provides:
-- **Interactive Graph Visualization** - WebGL-accelerated dependency graphs with ForceAtlas2 physics
-- **Multi-Agent Analysis** - Security, architecture, performance, quality, and onboarding insights
-- **Safe Refactor Simulation** - Impact analysis before making changes
-- **Multi-LLM Support** - Claude, GPT, Groq, Cerebras, and Gemini with automatic fallback
+**Rev BOB** is an **AI-powered integration platform** that bridges the gap between code intelligence and enterprise workflows. Built for the **IBM BOB Hackathon 2025**, Rev BOB seamlessly connects:
 
-Built from [REV-BOB](https://github.com/anthropics/REV-BOB) with enhanced features and production-ready architecture.
+### 🔗 Core Integrations
 
-## ✨ Features
+<table>
+<tr>
+<td width="50%">
 
-### 🎨 Advanced Visualization
-- **WebGL Graph Rendering** - Hardware-accelerated with Sigma.js (60fps with 1000+ nodes)
-- **ForceAtlas2 Layout** - Physics-based graph layout for organic clustering
-- **Type-Based Encoding** - Different colors for files, functions, classes, methods
-- **Blast Radius Analysis** - Visual impact propagation for code changes
-- **Interactive Exploration** - Drag, zoom, pan, and filter nodes
+**🤖 AI/LLM Integration**
+- **IBM Watson AI** - Enterprise NLP & code understanding
+- **NVIDIA AI** - High-performance inference
+- **Intelligent Routing** - Automatic fallback & load balancing
+- **Custom Prompts** - Optimized for code analysis
 
-### 🤖 Multi-LLM Orchestration
-- **5+ LLM Providers** - Anthropic Claude, OpenAI GPT, Groq, Cerebras, Google Gemini
-- **Automatic Fallback** - If one provider fails, automatically tries the next
-- **Custom LLMs** - Support for custom endpoints with OpenAI-compatible APIs
-- **Cost Optimization** - Intelligent routing based on task complexity
+</td>
+<td width="50%">
 
-### 🔍 Code Analysis
-- **Dependency Graphs** - Visualize imports, calls, and relationships
-- **Complexity Metrics** - Measure code complexity and maintainability
-- **Impact Analysis** - See what changes before you make them
-- **Security Review** - AI-powered security vulnerability detection
-- **Architecture Review** - Structural quality assessment
+**📋 Project Management**
+- **Jira Integration** - Create issues from analysis
+- **Auto-ticket Generation** - Convert findings to tasks
+- **Project Mapping** - Link code to business requirements
+- **Issue Type Detection** - Smart categorization
 
-### 🚀 Developer Tools
-- **GitHub Integration** - Fetch repos, create PRs, and branches
-- **File Upload** - Drag-and-drop ZIP files up to 500MB
-- **Code Inspector** - Syntax-highlighted code viewer
-- **Process Visualization** - Mermaid diagrams for workflows
-- **Report Generation** - Comprehensive analysis reports
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**💻 Version Control**
+- **GitHub Integration** - Clone, analyze, PR creation
+- **Branch Management** - Create feature branches
+- **File Operations** - Read/write repository files
+- **PR Automation** - Generate PRs from refactoring plans
+
+</td>
+<td width="50%">
+
+**🏢 IBM BOB Ecosystem**
+- **IBM Watsonx.ai** - Enterprise AI orchestration
+- **IBM Watsonx Orchestrate** - Workflow automation
+- **IBM Cloud** - Native cloud integration
+- **BOB Framework** - Built on IBM BOB principles
+
+</td>
+</tr>
+</table>
+
+### 💡 The Rev BOB Advantage
+
+Rev BOB transforms code analysis into actionable workflows by **automatically connecting** what the AI discovers with the tools your team already uses—no manual copying, no context switching, just seamless automation from insight to implementation.
+
+## 🎯 Use Cases
+
+### For Software Architects
+- **📐 Architecture Review** - Visualize system structure and identify architectural smells
+- **🔄 Refactoring Planning** - Analyze impact before making structural changes
+- **📊 Technical Debt** - Quantify complexity and identify improvement areas
+
+### For Development Teams
+- **🚀 Onboarding** - Help new developers understand codebases faster
+- **🔍 Code Understanding** - Ask questions in natural language, get accurate answers
+- **🐛 Bug Investigation** - Trace execution flows to find root causes
+
+### For Engineering Leaders
+- **📈 Team Productivity** - Reduce time spent understanding legacy code
+- **⚡ Decision Making** - Data-driven insights for architectural decisions
+- **🔐 Security & Compliance** - AI-powered security audits and vulnerability detection
+
+## ✨ Key Features
+
+### 🔍 Intelligent Code Visualization
+- **WebGL-Accelerated Graphs** - Render 1000+ nodes at 60fps with hardware acceleration
+- **Physics-Based Layout** - ForceAtlas2 algorithm creates organic, intuitive code clusters
+- **Smart Type Encoding** - Visual distinction between files, functions, classes, and methods
+- **Blast Radius Analysis** - See exactly what code will be affected by your changes
+- **Interactive Exploration** - Drag, zoom, filter, and explore your entire codebase visually
+
+### 🤖 AI-Powered Intelligence
+
+**IBM Watson Integration**
+- **Enterprise-Grade AI** - Production-ready analysis with IBM's trusted AI platform
+- **Deep Code Understanding** - Semantic analysis of code structure and relationships
+- **Business Process Discovery** - Automatically map business workflows from code
+- **Security & Compliance** - AI-driven vulnerability detection and best practices
+
+**NVIDIA AI Integration**
+- **High-Performance Inference** - Fast, scalable AI processing for large codebases
+- **Process Detection** - Identify execution flows and critical paths
+- **Natural Language Queries** - Ask questions about your code in plain English
+- **Automatic Fallback** - Intelligent routing ensures high availability
+
+### 📊 Enterprise Analysis
+- **Automated Process Detection** - Discover hidden workflows and execution chains
+- **Impact Assessment** - Measure change propagation across your codebase
+- **Complexity Metrics** - Quantify technical debt and maintainability
+- **Architecture Review** - AI-powered structural quality assessment
+- **Security Audit** - Identify vulnerabilities and security risks
+
+### 🔗 Seamless Integration
+- **GitHub Integration** - Clone repos, create PRs, and manage branches
+- **Jira Integration** - Create issues directly from code analysis
+- **IBM Watsonx.ai** - Connect to enterprise AI workflows
+- **Drag & Drop Upload** - Analyze ZIP files up to 500MB instantly
+- **RESTful API** - Integrate Rev BOB into your CI/CD pipeline
 
 ## 🏗️ Architecture
 
+Rev BOB follows a modern, scalable architecture designed for enterprise deployments:
+
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                        Frontend (Vite)                      │
-│  ┌──────────────┐  ┌──────────────┐  ┌─────────────────┐  │
-│  │  GraphView2D │  │ Multi-Agent  │  │ Code Inspector  │  │
-│  │  (Sigma.js)  │  │   Analysis   │  │  (Highlighted)  │  │
-│  └──────────────┘  └──────────────┘  └─────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-                              ↓ HTTP/REST
-┌─────────────────────────────────────────────────────────────┐
-│                  Backend (Express + TypeScript)             │
-│  ┌──────────────┐  ┌──────────────┐  ┌─────────────────┐  │
-│  │ Graph Builder│  │   GitHub     │  │   Multi-LLM     │  │
-│  │   (Babel)    │  │  Integration │  │  Orchestrator   │  │
-│  └──────────────┘  └──────────────┘  └─────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────┐
+│                    Frontend (React + Vite)                     │
+│  ┌─────────────┐  ┌──────────────┐  ┌──────────────────────┐ │
+│  │  Graph View │  │   Ask AI     │  │  Process Detection   │ │
+│  │ (Sigma.js)  │  │  (Natural    │  │  (Auto Workflow      │ │
+│  │  WebGL      │  │   Language)  │  │   Discovery)         │ │
+│  └─────────────┘  └──────────────┘  └──────────────────────┘ │
+│  ┌─────────────┐  ┌──────────────┐  ┌──────────────────────┐ │
+│  │Code         │  │   GitHub     │  │  Jira Integration    │ │
+│  │Inspector    │  │  Integration │  │                      │ │
+│  └─────────────┘  └──────────────┘  └──────────────────────┘ │
+└────────────────────────────────────────────────────────────────┘
+                              ↓ RESTful API
+┌────────────────────────────────────────────────────────────────┐
+│              Backend (Express.js + TypeScript)                 │
+│  ┌─────────────┐  ┌──────────────┐  ┌──────────────────────┐ │
+│  │Graph Builder│  │  GitHub API  │  │   Jira API           │ │
+│  │(Babel AST)  │  │  Integration │  │   Integration        │ │
+│  └─────────────┘  └──────────────┘  └──────────────────────┘ │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │            AI Orchestration Layer                       │  │
+│  │  • Intelligent routing & fallback                       │  │
+│  │  • JSON extraction & validation                         │  │
+│  │  • Response caching & optimization                      │  │
+│  └─────────────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────────────┘
                               ↓
-┌─────────────────────────────────────────────────────────────┐
-│                      LLM Providers                          │
-│   Claude  •  GPT-4  •  Groq  •  Cerebras  •  Gemini       │
-└─────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────┐
+│                      AI Provider Layer                         │
+│  ┌──────────────────────┐    ┌─────────────────────────────┐  │
+│  │   IBM Watson AI      │    │      NVIDIA AI              │  │
+│  │   • Enterprise AI    │    │   • High Performance        │  │
+│  │   • Watsonx.ai       │    │   • Low Latency             │  │
+│  │   • Security Focused │    │   • Scalable                │  │
+│  └──────────────────────┘    └─────────────────────────────┘  │
+└────────────────────────────────────────────────────────────────┘
 ```
+
+### Core Components
+
+1. **Frontend Layer** - React-based SPA with real-time graph visualization
+2. **API Layer** - Express.js REST API with TypeScript type safety
+3. **Analysis Engine** - Babel-based AST parsing and graph construction
+4. **AI Orchestration** - Intelligent routing between IBM Watson and NVIDIA AI
+5. **Integration Layer** - GitHub, Jira, and IBM Watsonx.ai connectors
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ (with pnpm)
-- At least one LLM API key (Anthropic, OpenAI, Groq, Cerebras, or Gemini)
-- Optional: GitHub token for repo analysis
+- **Node.js 18+** with pnpm package manager
+- **IBM Watson API Key** (from IBM Cloud)
+- **NVIDIA AI API Key** (from NVIDIA AI)
+- **Optional**: GitHub token for repository analysis
+- **Optional**: Jira credentials for issue integration
 
 ### Installation
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/devtools-ai-suite.git
-cd devtools-ai-suite
+git clone https://github.com/yourusername/rev-bob.git
+cd rev-bob
 
 # 2. Install dependencies
 pnpm install
 
-# 3. Configure environment
+# 3. Configure environment variables
 cd backend
 cp .env.example .env
-# Edit .env with your API keys
 
-# 4. Start development
+# Edit .env with your API keys:
+# - IBM_WATSON_API_KEY=your_watson_key
+# - NVIDIA_API_KEY=your_nvidia_key
+# - GITHUB_TOKEN=your_github_token (optional)
+# - JIRA_HOST, JIRA_EMAIL, JIRA_API_TOKEN (optional)
+
+# 4. Start the application
 cd ..
 pnpm dev
 ```
 
 ### That's it! 🎉
 
-- **Frontend**: http://localhost:3000
-- **Backend**: http://localhost:3001
-- **Health Check**: http://localhost:3001/health
+Your Rev BOB instance is now running:
+
+- **🌐 Frontend**: http://localhost:3000
+- **⚡ Backend API**: http://localhost:3001
+- **💚 Health Check**: http://localhost:3001/health
+
+### First Steps
+
+1. **Upload a codebase** - Drag and drop a ZIP file or clone from GitHub
+2. **Explore the graph** - Visualize dependencies and relationships
+3. **Ask questions** - Use natural language to query your codebase
+4. **Detect processes** - Discover business workflows automatically
+5. **Analyze impact** - See the blast radius of potential changes
 
 ## 📦 Project Structure
 
 ```
-devtools-ai-suite/
+rev-bob/
 ├── packages/
-│   └── web/                      # Vite + React frontend
+│   └── web/                       # Frontend Application
 │       ├── src/
-│       │   ├── App.tsx
-│       │   ├── components/       # React components
-│       │   │   ├── GraphView2D.tsx
-│       │   │   ├── MetricsDashboard.tsx
-│       │   │   ├── CodeInspector.tsx
-│       │   │   └── ...
-│       │   ├── lib/              # Utilities
-│       │   └── types/            # TypeScript types
+│       │   ├── App.tsx            # Main app component
+│       │   ├── components/        # React components
+│       │   │   ├── GraphView2D.tsx        # Graph visualization
+│       │   │   ├── AskAI.tsx              # Natural language queries
+│       │   │   ├── ProcessDetection.tsx   # Workflow discovery
+│       │   │   ├── CodeInspector.tsx      # Code viewer
+│       │   │   ├── GithubIntegration.tsx  # GitHub features
+│       │   │   └── JiraIntegration.tsx    # Jira features
+│       │   ├── lib/
+│       │   │   ├── api.ts         # API client
+│       │   │   └── graph.ts       # Graph utilities
+│       │   └── types/
+│       │       └── graph.ts       # TypeScript definitions
 │       ├── vite.config.ts
 │       └── package.json
 │
-└── backend/                       # Express + TypeScript server
-    ├── index.ts                   # Main server
-    ├── github.ts                  # GitHub integration
-    ├── graph-builder.ts           # Graph construction
-    ├── parser.ts                  # Code parsing
-    ├── mcp-server.ts              # Model Context Protocol
+└── backend/                        # Backend API Server
+    ├── index.ts                    # Main server & routes
+    ├── github.ts                   # GitHub API integration
+    ├── graph-builder.ts            # AST parsing & graph construction
+    ├── parser.ts                   # Code analysis engine
+    ├── mcp-server.ts               # Model Context Protocol server
+    ├── .env.example                # Environment template
     ├── package.json
     └── tsconfig.json
 ```
@@ -155,97 +272,174 @@ pnpm clean
 
 ### Environment Variables
 
-Create `backend/.env`:
+Create `backend/.env` with the following configuration:
 
 ```bash
-# Server
+# Server Configuration
 PORT=3001
 NODE_ENV=development
 
-# At least one LLM API key required
-ANTHROPIC_API_KEY=sk-ant-...
-OPENAI_API_KEY=sk-...
-GROQ_API_KEY=gsk_...
-CEREBRAS_API_KEY=csk-...
-GOOGLE_API_KEY=AIza...
+# IBM Watson AI (Required)
+IBM_WATSON_API_KEY=your_watson_api_key_here
+IBM_WATSON_URL=https://api.watsonx.ai/...  # Your Watson instance URL
 
-# Optional: GitHub integration
-GITHUB_TOKEN=ghp_...
+# NVIDIA AI (Required)
+NVIDIA_API_KEY=your_nvidia_api_key_here
+NVIDIA_BASE_URL=https://integrate.api.nvidia.com/v1
+
+# GitHub Integration (Optional)
+GITHUB_TOKEN=ghp_your_github_token_here
+
+# Jira Integration (Optional)
+JIRA_HOST=your-company.atlassian.net
+JIRA_EMAIL=your-email@company.com
+JIRA_API_TOKEN=your_jira_api_token_here
 
 # Frontend URL (for CORS)
 FRONTEND_URL=http://localhost:3000
+
+# IBM Watsonx Orchestrate (Optional)
+WATSONX_ORCHESTRATE_URL=https://your-instance.watsonorchestrate.ibm.com
+WATSONX_ORCHESTRATE_API_KEY=your_orchestrate_api_key_here
 ```
+
+> **Note**: You need at least one AI provider (IBM Watson or NVIDIA AI) configured for Rev BOB to function.
 
 ## 📚 API Documentation
 
-### Graph Operations
+### Core Endpoints
 
+#### Upload & Parse Codebase
 ```typescript
-// Upload codebase
-POST /upload
-Body: FormData with files
-
-// Fetch from GitHub
-POST /github
-Body: { url: "https://github.com/owner/repo" }
-
-// Get dependency graph
-GET /graph
+POST /api/upload
+Content-Type: multipart/form-data
+Body: { file: <zip-file> }
 Response: { nodes: [...], edges: [...] }
 ```
 
-### Analysis
-
+#### Clone from GitHub
 ```typescript
-// Natural language query
-POST /query
-Body: { query: "What does this code do?" }
+POST /api/clone
+Body: { githubUrl: "https://github.com/owner/repo" }
+Response: { nodes: [...], edges: [...] }
+```
 
-// Multi-agent analysis
-POST /agents
-Response: {
-  security: { title, icon, content },
-  architecture: { title, icon, content },
-  performance: { title, icon, content },
-  quality: { title, icon, content },
-  onboarding: { title, icon, content }
+### AI-Powered Analysis
+
+#### Ask AI (Natural Language Query)
+```typescript
+POST /api/query
+Body: { 
+  question: "How does authentication work?",
+  graphData: { nodes: [...], edges: [...] },
+  llmConfig?: { provider: "watson" | "nvidia" }
 }
+Response: {
+  explanation: "CALL CHAIN:\nauth.ts -> validateToken() -> ...",
+  relevantNodes: ["auth.ts", "validateToken"],
+  provider: "IBM Watson"
+}
+```
 
-// Generate report
-POST /report
-Response: { stats, mermaid, markdown }
+#### Process Detection (Auto-discover workflows)
+```typescript
+POST /api/processes
+Body: { 
+  graphData: { nodes: [...], edges: [...] },
+  focusNode?: "specific-node-label"
+}
+Response: {
+  processes: [{
+    name: "User Authentication Flow",
+    steps: 5,
+    entryPoint: "login.ts",
+    explanation: "Handles user login...",
+    mermaid: "graph TD\n A[login] --> B[validate]..."
+  }]
+}
+```
+
+#### Multi-Agent Analysis
+```typescript
+POST /api/agent-analysis
+Body: { graphData: { nodes: [...], edges: [...] } }
+Response: {
+  agents: {
+    security: { title, icon, content },
+    architecture: { title, icon, content },
+    performance: { title, icon, content },
+    quality: { title, icon, content },
+    onboarding: { title, icon, content }
+  },
+  generatedAt: "2025-05-17T12:00:00Z"
+}
 ```
 
 ### GitHub Integration
 
 ```typescript
-// Create pull request
-POST /github/pr
-Body: { owner, repo, title, body, head, base }
+// List repository files
+POST /api/github/files
+Body: { githubUrl, path?, token? }
 
 // Create branch
-POST /github/branch
-Body: { owner, repo, branch, sha }
+POST /api/github/branch
+Body: { owner, repo, branchName, baseBranch, token? }
+
+// Create pull request
+POST /api/github/pr
+Body: { owner, repo, title, body, head, base, token? }
+```
+
+### Jira Integration
+
+```typescript
+// Get Jira status
+GET /api/jira/status
+
+// List projects
+GET /api/jira/projects
+
+// Create issue
+POST /api/jira/issue
+Body: {
+  project: "PROJ",
+  summary: "Issue title",
+  description: "Description",
+  issuetype: "Task",
+  priority: "Medium"
+}
 ```
 
 ## 🎨 Tech Stack
 
-### Frontend
-- **Vite 5.2** - Lightning-fast dev server with HMR
-- **React 18.3** - Modern UI library
-- **TypeScript 5.4** - Type-safe development
-- **Sigma.js 3.0** - WebGL graph rendering
-- **D3.js 7.9** - Data visualization
-- **Three.js 0.169** - 3D graphics
-- **GSAP 3.14** - Smooth animations
+### Frontend Technologies
+- **⚡ Vite 5.2** - Lightning-fast dev server with HMR
+- **⚛️ React 18.3** - Modern component-based UI
+- **📘 TypeScript 5.4** - Type-safe development
+- **📊 Sigma.js 3.0** - WebGL-accelerated graph rendering
+- **🎨 Tailwind CSS** - Utility-first styling
+- **🔄 React Query** - Data fetching and caching
 
-### Backend
-- **Express 4.18** - Fast web framework
-- **TypeScript 5.4** - Type safety
-- **Anthropic SDK** - Claude integration
-- **OpenAI SDK** - GPT integration
-- **Babel Parser** - Code analysis
-- **Graphology** - Graph data structures
+### Backend Technologies
+- **🚀 Express.js 4.18** - Fast, unopinionated web framework
+- **📘 TypeScript 5.4** - Full type safety
+- **🔍 Babel Parser** - JavaScript/TypeScript AST parsing
+- **📊 Graphology** - Graph data structures and algorithms
+- **🔗 Octokit** - GitHub API integration
+- **📝 Atlassian Jira API** - Issue tracking integration
+
+### AI & Machine Learning
+- **🤖 IBM Watson AI** - Enterprise-grade natural language understanding
+- **⚡ NVIDIA AI** - High-performance inference and processing
+- **🧠 Custom AI Orchestration** - Intelligent routing and fallback logic
+- **📦 Robust JSON Extraction** - Advanced LLM response parsing
+
+### Infrastructure
+- **☁️ Vercel** - Frontend hosting with edge functions
+- **🚂 Railway** - Backend API deployment
+- **🔐 CORS** - Secure cross-origin resource sharing
+- **📡 RESTful API** - Standard HTTP endpoints
 
 ## 📊 Performance
 
@@ -272,24 +466,69 @@ pnpm test:e2e
 
 ## 🚢 Deployment
 
-### Frontend (Vercel)
+Rev BOB is production-ready and deployed at:
+- **Frontend**: https://rev-bob.vercel.app (Vercel)
+- **Backend**: https://devtoolsbackend-production.up.railway.app (Railway)
+
+### Deploy Your Own Instance
+
+#### Frontend (Vercel)
 ```bash
+# Deploy to Vercel
 cd packages/web
 vercel deploy --prod
+
+# Or use Vercel CLI with auto-detection
+vercel --prod
 ```
 
-### Backend (Railway/Render)
+#### Backend (Railway)
 ```bash
+# Deploy to Railway
 cd backend
 railway up
-# or
+
+# Or link to existing project
+railway link
+railway up
+```
+
+#### Backend (Alternative - Render)
+```bash
+# Deploy to Render
+cd backend
 render deploy
 ```
 
-### Environment Variables for Production
-- Set all LLM API keys
-- Configure FRONTEND_URL to production domain
-- Enable CORS for production domains
+### Production Environment Variables
+
+Ensure these are configured in your production environment:
+
+```bash
+# Required - AI Providers
+IBM_WATSON_API_KEY=your_production_watson_key
+NVIDIA_API_KEY=your_production_nvidia_key
+
+# Required - CORS
+FRONTEND_URL=https://your-frontend-domain.vercel.app
+
+# Optional - Integrations
+GITHUB_TOKEN=your_github_token
+JIRA_HOST=your-company.atlassian.net
+JIRA_EMAIL=your-email@company.com
+JIRA_API_TOKEN=your_jira_token
+
+# Optional - IBM Watsonx
+WATSONX_ORCHESTRATE_URL=https://your-instance.watsonorchestrate.ibm.com
+WATSONX_ORCHESTRATE_API_KEY=your_orchestrate_key
+```
+
+### CI/CD
+
+Rev BOB supports automatic deployments:
+- **Frontend**: Auto-deploys on push to `main` via Vercel
+- **Backend**: Auto-deploys on push to `main` via Railway
+- **Health Checks**: `/health` endpoint monitors backend status
 
 ## 📖 Documentation
 
@@ -354,19 +593,51 @@ Contributions are welcome! Please:
 
 MIT License - see [LICENSE](LICENSE) file for details
 
+## 🏆 IBM BOB Hackathon 2025
+
+Rev BOB was specifically designed and built for the **IBM BOB Hackathon 2025** to demonstrate:
+
+- **Enterprise AI Integration** - Seamless integration with IBM Watson and NVIDIA AI
+- **Intelligent Code Analysis** - AI-powered process detection and impact analysis
+- **Developer Productivity** - Visual tools that make complex codebases understandable
+- **Scalable Architecture** - Production-ready design for enterprise deployments
+
+### Hackathon Highlights
+
+✅ **IBM Watson Integration** - Deep code understanding with enterprise AI  
+✅ **NVIDIA AI Performance** - High-speed inference for large codebases  
+✅ **Visual Intelligence** - Interactive dependency graphs with blast radius analysis  
+✅ **Process Discovery** - Automatic business workflow detection from code  
+✅ **Enterprise Ready** - GitHub, Jira, and Watsonx.ai integrations  
+
 ## 🙏 Acknowledgments
 
-- Built from [REV-BOB](https://github.com/anthropics/REV-BOB) by Anthropic
-- Inspired by GitNexus and modern code analysis tools
-- Powered by Claude, GPT, Groq, Cerebras, and Gemini
+- **IBM Watson AI** - For providing enterprise-grade AI capabilities
+- **NVIDIA AI** - For high-performance AI infrastructure
+- Inspired by modern code intelligence tools and static analysis platforms
+- Built with ❤️ for developers who want to understand code visually
 
-## 📧 Contact
+## 📧 Support & Contact
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/devtools-ai-suite/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/devtools-ai-suite/discussions)
+- **🐛 Report Issues**: [GitHub Issues](https://github.com/yourusername/rev-bob/issues)
+- **💬 Discussions**: [GitHub Discussions](https://github.com/yourusername/rev-bob/discussions)
+- **📖 Documentation**: See [docs/](./docs/) folder for detailed guides
+- **🏆 Hackathon**: IBM BOB Hackathon 2025
+
+## 🌟 Live Demo
+
+- **🌐 Production**: [https://rev-bob.vercel.app](https://rev-bob.vercel.app)
+- **⚡ API Backend**: [https://devtoolsbackend-production.up.railway.app](https://devtoolsbackend-production.up.railway.app)
+- **💚 Health Check**: [https://devtoolsbackend-production.up.railway.app/health](https://devtoolsbackend-production.up.railway.app/health)
 
 ---
 
-**Built with ❤️ for developers who love beautiful code**
+<div align="center">
 
-🚀 **[Get Started Now](#quick-start)** | 📚 **[Read the Docs](./CLAUDE.md)** | 🐛 **[Report a Bug](https://github.com/yourusername/devtools-ai-suite/issues)**
+**🚀 Built for IBM BOB Hackathon 2025**
+
+Powered by IBM Watson AI & NVIDIA AI
+
+🚀 **[Get Started](#quick-start)** | 📚 **[Documentation](./docs/)** | 🐛 **[Report Bug](https://github.com/yourusername/rev-bob/issues)** | ⭐ **[Star on GitHub](https://github.com/yourusername/rev-bob)**
+
+</div>
