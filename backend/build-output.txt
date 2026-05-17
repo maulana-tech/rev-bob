@@ -1,0 +1,13 @@
+
+> @devtools/backend@1.0.0 build /Users/em/web/rev-bob/backend
+> tsc --skipLibCheck && node -e "const fs=require('fs');fs.mkdirSync('dist',{recursive:true});fs.copyFileSync('landing.html','dist/landing.html');"
+
+index.ts(1436,9): error TS2352: Conversion of type 'Promise<import("/Users/em/web/rev-bob/node_modules/.pnpm/node_modules/@types/node-fetch/index").Response>' to type 'Promise<Response>' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'formData' is missing in type 'import("/Users/em/web/rev-bob/node_modules/.pnpm/node_modules/@types/node-fetch/index").Response' but required in type 'import("/Users/em/web/rev-bob/node_modules/.pnpm/undici-types@6.21.0/node_modules/undici-types/fetch").Response'.
+index.ts(1436,25): error TS2322: Type '{ Authorization: string; } | { Authorization?: undefined; }' is not assignable to type 'HeadersInit | undefined'.
+  Type '{ Authorization?: undefined; }' is not assignable to type 'HeadersInit | undefined'.
+    Type '{ Authorization?: undefined; }' is not assignable to type '{ [key: string]: string | string[]; }'.
+      Property 'Authorization' is incompatible with index signature.
+        Type 'undefined' is not assignable to type 'string | string[]'.
+routes-orchestrate-proxy.ts(11,7): error TS2742: The inferred type of 'router' cannot be named without a reference to '.pnpm/@types+express-serve-static-core@4.19.8/node_modules/@types/express-serve-static-core'. This is likely not portable. A type annotation is necessary.
+ ELIFECYCLE  Command failed with exit code 1.

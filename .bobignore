@@ -1,0 +1,143 @@
+# .bobignore - Files and directories Bob AI should ignore during analysis
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build artifacts
+dist/
+build/
+out/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Environment files (sensitive data)
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Log files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Cache directories
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Repository clones (for testing)
+/tmp/repos/
+
+# Large binary files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+*.exe
+*.dll
+*.so
+*.dylib
+*.bin
+*.dat
+
+# Media files (usually not needed for code analysis)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.svg
+*.mp4
+*.mp3
+*.wav
+*.pdf
+*.doc
+*.docx
+
+# Documentation that doesn't need analysis
+CHANGELOG.md
+LICENSE
+*.lock
+
+# Old backups
+*-old-backup/
+packages/web-old-backup/
+
+# Git files
+.git/
+.gitignore
+.gitattributes
+
+# CI/CD
+.github/workflows/
+.gitlab-ci.yml
+.travis.yml
+circle.yml
+
+# Error logs and debug files
+tsc-errors.txt
+typescript-errors.txt
+vite-dev.txt
+
+# Made with Bob

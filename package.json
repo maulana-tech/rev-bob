@@ -1,0 +1,32 @@
+{
+  "name": "devtools-ai-suite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered developer tools platform with IBM Bob integration",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"pnpm web:dev\" \"pnpm backend:dev\"",
+    "build": "pnpm web:build && pnpm backend:build",
+    "web:dev": "cd packages/web && pnpm dev",
+    "web:build": "cd packages/web && pnpm build",
+    "backend:dev": "cd backend && pnpm dev",
+    "backend:build": "cd backend && pnpm build",
+    "backend:python": "cd backend && python -m uvicorn main:app --reload --port 8000",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "clean": "rm -rf packages/*/dist packages/*/.next packages/*/node_modules backend/dist backend/node_modules node_modules",
+    "health": "./scripts/health-check.sh",
+    "kill-ports": "lsof -ti:3000,3001,3002 | xargs kill -9 || echo 'No processes to kill'"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0"
+}
