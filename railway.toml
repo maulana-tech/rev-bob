@@ -1,8 +1,7 @@
 [build]
 builder = "nixpacks"
-buildCommand = "cd backend && pnpm install --frozen-lockfile"
 
 [deploy]
-startCommand = "cd backend && pnpm start"
+startCommand = "pnpm start"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10

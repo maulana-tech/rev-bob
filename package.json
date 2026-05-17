@@ -7,8 +7,9 @@
     "packages/*"
   ],
   "scripts": {
+    "start": "cd backend && pnpm start",
     "dev": "concurrently \"pnpm web:dev\" \"pnpm backend:dev\"",
-    "build": "pnpm web:build && pnpm backend:build",
+    "build": "cd backend && pnpm install --frozen-lockfile",
     "web:dev": "cd packages/web && pnpm dev",
     "web:build": "cd packages/web && pnpm build",
     "backend:dev": "cd backend && pnpm dev",
