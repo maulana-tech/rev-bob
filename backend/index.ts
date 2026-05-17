@@ -2042,6 +2042,11 @@ Respond with JSON only (no other text):
   }
 });
 
+// Health check endpoint
+app.get('/health', (_req, res) => {
+  res.json({ status: 'ok' });
+});
+
 // Mount DevTools AI Suite routes
 app.use('/api', devtoolsRoutes);
 app.use('/api', orchestrateProxyRoutes);
