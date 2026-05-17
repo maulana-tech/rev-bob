@@ -95,7 +95,7 @@ export default function UploadZone({ onGraph }: UploadZoneProps) {
     }, [githubUrl, onGraph]);
 
     const handleGitHubConnect = () => {
-        window.location.href = '/api/github/auth';
+        window.location.href = 'https://devtoolsbackend-production.up.railway.app/api/github/auth';
     };
 
     const currentGithubStep = GITHUB_LOADING_STEPS[loadingStepIndex];
