@@ -842,16 +842,57 @@ function resolveGraphData(fallbackGraph?: GraphData | null): GraphData | null {
 }
 
 function extractJSON(text: string): string {
-  let cleaned = text.replace(/```json\n?|```/g, "").trim();
-  
-  const firstBrace = cleaned.indexOf('{');
-  const lastBrace = cleaned.lastIndexOf('}');
-  
-  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-    cleaned = cleaned.slice(firstBrace, lastBrace + 1);
+  // First, try to extract content between ```json and ``` markers
+  const jsonBlockMatch = text.match(/```json\s*([\s\S]*?)\s*```/);
+  if (jsonBlockMatch && jsonBlockMatch[1]) {
+    return jsonBlockMatch[1].trim();
   }
-  
-  return cleaned;
+
+  // If no markdown block, look for JSON object boundaries
+  // Find the first { and its matching closing }
+  const firstBrace = text.indexOf('{');
+  if (firstBrace === -1) {
+    return text.trim();
+  }
+
+  // Count braces to find the matching closing brace
+  let braceCount = 0;
+  let inString = false;
+  let escapeNext = false;
+
+  for (let i = firstBrace; i < text.length; i++) {
+    const char = text[i];
+
+    if (escapeNext) {
+      escapeNext = false;
+      continue;
+    }
+
+    if (char === '\\') {
+      escapeNext = true;
+      continue;
+    }
+
+    if (char === '"') {
+      inString = !inString;
+      continue;
+    }
+
+    if (!inString) {
+      if (char === '{') {
+        braceCount++;
+      } else if (char === '}') {
+        braceCount--;
+        if (braceCount === 0) {
+          // Found the matching closing brace
+          return text.slice(firstBrace, i + 1).trim();
+        }
+      }
+    }
+  }
+
+  // If we couldn't find a complete JSON object, return the original text trimmed
+  return text.trim();
 }
 
 app.use(cors({
@@ -1059,15 +1100,19 @@ STEP 4 - Generate Mermaid diagram:
 For each process create a valid Mermaid flowchart showing
 every step in the execution chain.
 
-RETURN strictly valid JSON only:
+CRITICAL: Your response must be ONLY valid JSON with no additional text, explanations, or markdown.
+Do not include any text before or after the JSON object.
+Do not wrap the JSON in markdown code blocks.
+
+Return this exact JSON structure:
 {
-  'processes': [
+  "processes": [
     {
-      'name': 'human readable process name',
-      'steps': number of nodes in the chain,
-      'entryPoint': 'the starting node label',
-      'explanation': 'plain english description of what this process does and why it matters',
-      'mermaid': 'graph TD\n  A[entryPoint] --> B[step2]\n  B --> C[step3]...'
+      "name": "human readable process name",
+      "steps": number of nodes in the chain,
+      "entryPoint": "the starting node label",
+      "explanation": "plain english description of what this process does and why it matters",
+      "mermaid": "graph TD\\n  A[entryPoint] --> B[step2]\\n  B --> C[step3]..."
     }
   ]
 }
@@ -1080,7 +1125,8 @@ Rules:
 - Each process must have at least ${minimumSteps} steps
 - Only use node labels that actually exist in the provided graph
 - Never return empty processes array
-- Mermaid syntax must be valid graph TD format`;
+- Mermaid syntax must be valid graph TD format
+- Response must be pure JSON only - no explanatory text`;
 
     console.log('[Processes] Calling LLM for process detection...');
     const text = await Promise.race([
