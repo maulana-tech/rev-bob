@@ -44,8 +44,8 @@
 - Proxy rules: `/health` and `/api` → port 3001
 
 ### Legacy Error Messages
-- `packages/web/src/lib/api.ts` contains hardcoded "CDE AI" and "vectron-app" references
-- These are from original CDE-APP project - NOT actual service names
+- `packages/web/src/lib/api.ts` contains hardcoded "CDE AI" and "rev-bob" references
+- These are from original REV-BOB project - NOT actual service names
 
 ### API Endpoint Pattern
 - Health check at `/health` (NOT `/api/health`)

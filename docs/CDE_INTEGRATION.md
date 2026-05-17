@@ -1,8 +1,8 @@
-# CDE-APP Integration Guide
+# REV-BOB Integration Guide
 
 ## Overview
 
-CDE-APP (Code Dependency Explorer AI) telah berhasil diintegrasikan ke dalam DevTools AI Suite. Komponen visualisasi 3D dan graph analysis dari CDE-APP kini tersedia di project ini.
+REV-BOB (Code Dependency Explorer AI) telah berhasil diintegrasikan ke dalam DevTools AI Suite. Komponen visualisasi 3D dan graph analysis dari REV-BOB kini tersedia di project ini.
 
 ## Struktur Setelah Integrasi
 
@@ -54,7 +54,7 @@ devtools-ai-suite/
 ### 2. Advanced Graph Visualization Components
 
 #### GraphView2D.tsx
-**From CDE-APP**
+**From REV-BOB**
 
 Advanced Sigma.js-based WebGL graph renderer dengan features:
 - ✅ ForceAtlas2 layout algorithm
@@ -82,7 +82,7 @@ Advanced Sigma.js-based WebGL graph renderer dengan features:
 - `DOCUMENTS` → Gray (documentation)
 
 #### MetricsDashboard.tsx
-**From CDE-APP**
+**From REV-BOB**
 
 Comprehensive metrics visualization:
 - ✅ Complexity analysis
@@ -92,7 +92,7 @@ Comprehensive metrics visualization:
 - ✅ Real-time updates
 
 #### CodeInspector.tsx
-**From CDE-APP**
+**From REV-BOB**
 
 Code detail panel:
 - ✅ Syntax highlighting
@@ -382,17 +382,17 @@ pnpm add sigma @sigma/edge-curve graphology graphology-layout-forceatlas2
 
 ## Credits
 
-**CDE-APP Components:**
+**REV-BOB Components:**
 - GraphView2D: Advanced Sigma.js WebGL renderer
 - MetricsDashboard: Code metrics visualization
 - CodeInspector: Syntax-highlighted code viewer
 
-**Original CDE-APP:**
+**Original REV-BOB:**
 - Architecture: Multi-model AI orchestration
 - Features: Structural code intelligence & safe refactor simulation
 
 **DevTools AI Suite:**
-- Integration: Seamless merge of CDE-APP features
+- Integration: Seamless merge of REV-BOB features
 - Enhancement: IBM Bob-powered code analysis
 - UI/UX: Professional, production-ready design
 

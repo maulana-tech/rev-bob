@@ -11,8 +11,8 @@ This file provides guidance to agents when working with code in this repository.
 - DO NOT assume FastAPI is the main backend despite Python files existing
 
 ### Frontend API Client Pattern
-- `packages/web/src/lib/api.ts` has hardcoded error messages referencing "CDE AI" and "vectron-app"
-- These are legacy references from the original CDE-APP project
+- `packages/web/src/lib/api.ts` has hardcoded error messages referencing "CDE AI" and "rev-bob"
+- These are legacy references from the original REV-BOB project
 - Backend health check is at `/health` (NOT `/api/health`)
 - API base path is `/api` but health endpoint is at root level
 

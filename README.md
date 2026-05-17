@@ -17,7 +17,7 @@ DevTools AI Suite is a powerful code analysis platform that provides:
 - **Safe Refactor Simulation** - Impact analysis before making changes
 - **Multi-LLM Support** - Claude, GPT, Groq, Cerebras, and Gemini with automatic fallback
 
-Built from [CDE-APP](https://github.com/anthropics/cde-app) with enhanced features and production-ready architecture.
+Built from [REV-BOB](https://github.com/anthropics/REV-BOB) with enhanced features and production-ready architecture.
 
 ## ✨ Features
 
@@ -356,7 +356,7 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ## 🙏 Acknowledgments
 
-- Built from [CDE-APP](https://github.com/anthropics/cde-app) by Anthropic
+- Built from [REV-BOB](https://github.com/anthropics/REV-BOB) by Anthropic
 - Inspired by GitNexus and modern code analysis tools
 - Powered by Claude, GPT, Groq, Cerebras, and Gemini
 

@@ -2,7 +2,7 @@
  * DevTools AI Suite Routes
  *
  * Additional routes to match Python backend functionality
- * Integrates with existing CDE-APP endpoints
+ * Integrates with existing REV-BOB endpoints
  */
 
 import express, { Router } from 'express';

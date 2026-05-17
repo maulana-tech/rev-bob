@@ -49,7 +49,7 @@ async function buildApiError(res: Response): Promise<Error> {
         message.toLowerCase().includes('internal server error') &&
         !(await isLocalBackendReachable())
     ) {
-        return new Error('Rev BOB backend is not reachable. Start the server in `vectron-app` and refresh the page.');
+        return new Error('Rev BOB backend is not reachable. Start the server in `rev-bob` and refresh the page.');
     }
 
     return new Error(message || `Server error ${res.status}`);
@@ -60,7 +60,7 @@ async function fetchFromApi(input: RequestInfo | URL, init?: RequestInit): Promi
         return await fetch(input, init);
     } catch (error) {
         if (!(await isLocalBackendReachable())) {
-            throw new Error('Rev BOB backend is not reachable. Start the server in `vectron-app` and refresh the page.');
+            throw new Error('Rev BOB backend is not reachable. Start the server in `rev-bob` and refresh the page.');
         }
 
         throw error instanceof Error ? error : new Error('Network request failed');

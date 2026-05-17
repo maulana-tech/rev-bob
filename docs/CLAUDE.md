@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**DevTools AI Suite** is an AI-powered code analysis platform built from **CDE-APP** (Code Dependency Explorer AI). It's a monorepo combining:
+**DevTools AI Suite** is an AI-powered code analysis platform built from **REV-BOB** (Code Dependency Explorer AI). It's a monorepo combining:
 - **Frontend**: Vite + React with advanced WebGL graph visualization
 - **Backend**: Express + TypeScript server with multi-LLM support
 - **Optional**: Python FastAPI for additional ML/AI tasks
@@ -448,7 +448,7 @@ cd packages/web && pnpm build  # Frontend
 
 - **MIGRATION_COMPLETE.md** - Complete migration guide and changelog
 - **CDE_INTEGRATION.md** - Original integration documentation
-- **cde-app/README.md** - Original CDE-APP documentation
+- **REV-BOB/README.md** - Original REV-BOB documentation
 - **README.md** - Project overview
 
 ---

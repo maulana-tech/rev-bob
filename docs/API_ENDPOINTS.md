@@ -6,7 +6,7 @@ Complete list of all backend API endpoints with authentication, request/response
 
 ## Table of Contents
 
-1. [Core CDE-APP Endpoints](#core-cde-app-endpoints)
+1. [Core REV-BOB Endpoints](#core-REV-BOB-endpoints)
 2. [GitHub Integration](#github-integration)
 3. [DevTools AI Suite](#devtools-ai-suite)
    - [CodeReview Copilot](#codereview-copilot)
@@ -15,7 +15,7 @@ Complete list of all backend API endpoints with authentication, request/response
 
 ---
 
-## Core CDE-APP Endpoints
+## Core REV-BOB Endpoints
 
 ### Health Check
 
@@ -1028,7 +1028,7 @@ Visit http://localhost:3000/app and use the interactive UI to test all features.
 
 **Total Endpoints**: 29
 
-**Core CDE-APP**: 10 endpoints  
+**Core REV-BOB**: 10 endpoints  
 **GitHub Integration**: 10 endpoints  
 **DevTools AI Suite**: 9 endpoints  
 

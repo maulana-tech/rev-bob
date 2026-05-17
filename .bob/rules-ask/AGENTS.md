@@ -14,8 +14,8 @@
 - Custom CSS design system in `index.css` (NOT Tailwind)
 
 ### Legacy References
-- `packages/web/src/lib/api.ts` contains "CDE AI" and "vectron-app" error messages
-- These are from original CDE-APP project by Anthropic
+- `packages/web/src/lib/api.ts` contains "CDE AI" and "rev-bob" error messages
+- These are from original REV-BOB project by Anthropic
 - NOT actual service names in this project
 
 ## API Endpoint Patterns

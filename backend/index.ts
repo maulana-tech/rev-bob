@@ -1980,7 +1980,7 @@ app.post("/api/github/refactor", async (req, res) => {
     const files = await listFiles(token, owner, repo, "");
     const sourceExtensions = [".ts", ".tsx", ".js", ".jsx"];
     
-    const targetDirs = ["vectron-app/server/src", "vectron-app/client/src"];
+    const targetDirs = ["rev-bob/server/src", "rev-bob/client/src"];
     let jsFiles: { name: string; path: string; type: string }[] = [];
     
     for (const dir of targetDirs) {

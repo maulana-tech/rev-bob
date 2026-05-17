@@ -8,7 +8,7 @@
 
 ## 🎯 Overview
 
-DevTools AI Suite adalah platform AI-powered code analysis yang dibangun dari **CDE-APP** (Code Dependency Explorer AI) dengan integrasi lengkap dari 3 tools Python backend:
+DevTools AI Suite adalah platform AI-powered code analysis yang dibangun dari **REV-BOB** (Code Dependency Explorer AI) dengan integrasi lengkap dari 3 tools Python backend:
 
 1. **CodeReview Copilot** - AI-powered PR analysis
 2. **DevFlow Automator** - Test & docs generation
@@ -75,7 +75,7 @@ pnpm backend:build # Backend only
 
 ## 📡 API Endpoints
 
-### Core CDE-APP (10 endpoints)
+### Core REV-BOB (10 endpoints)
 
 | Endpoint | Method | Status | Description |
 |----------|--------|--------|-------------|
@@ -220,7 +220,7 @@ GITHUB_TOKEN=ghp_your_token_here
 
 ```
 backend/
-├── index.ts                    # Main CDE-APP server (2029 lines)
+├── index.ts                    # Main REV-BOB server (2029 lines)
 ├── routes-devtools.ts          # DevTools AI routes (489 lines)
 ├── github.ts                   # GitHub integration
 ├── graph-builder.ts            # Graph construction

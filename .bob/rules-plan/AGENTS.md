@@ -46,7 +46,7 @@
 - Plan production deployment with reverse proxy or CORS
 
 ### Legacy Code References
-- Error messages reference "CDE AI" and "vectron-app" (from original CDE-APP)
+- Error messages reference "CDE AI" and "rev-bob" (from original REV-BOB)
 - These are NOT actual service names
 - Plan refactoring to remove legacy references if user-facing
 

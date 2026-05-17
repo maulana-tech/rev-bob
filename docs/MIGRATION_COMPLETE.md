@@ -1,8 +1,8 @@
-# ✅ CDE-APP Full Migration Complete!
+# ✅ REV-BOB Full Migration Complete!
 
 ## 🎉 Migration Summary
 
-CDE-APP telah berhasil **FULLY MIGRATED** ke DevTools AI Suite dengan struktur yang bersih dan production-ready!
+REV-BOB telah berhasil **FULLY MIGRATED** ke DevTools AI Suite dengan struktur yang bersih dan production-ready!
 
 ---
 
@@ -11,7 +11,7 @@ CDE-APP telah berhasil **FULLY MIGRATED** ke DevTools AI Suite dengan struktur y
 ```
 devtools-ai-suite/
 ├── packages/
-│   └── web/                    # ✨ CDE-APP CLIENT (Vite + React)
+│   └── web/                    # ✨ REV-BOB CLIENT (Vite + React)
 │       ├── src/
 │       │   ├── App.tsx
 │       │   ├── components/
@@ -34,8 +34,8 @@ devtools-ai-suite/
 │       ├── vite.config.ts
 │       └── package.json
 │
-└── backend/                     # ✨ CDE-APP SERVER + Python FastAPI
-    ├── index.ts                 # Main Express server (CDE-APP)
+└── backend/                     # ✨ REV-BOB SERVER + Python FastAPI
+    ├── index.ts                 # Main Express server (REV-BOB)
     ├── github.ts                # GitHub integration
     ├── graph-builder.ts         # Graph construction
     ├── graph-store.ts           # Graph storage
@@ -146,11 +146,11 @@ pnpm dev
 
 ### ✅ **Replaced `packages/web/`**
 - **Before**: Next.js 14 with App Router
-- **After**: Vite + React (from CDE-APP client)
-- **Reason**: CDE-APP uses Vite for faster HMR and better dev experience
+- **After**: Vite + React (from REV-BOB client)
+- **Reason**: REV-BOB uses Vite for faster HMR and better dev experience
 
 ### ✅ **Added TypeScript to `backend/`**
-- **Added**: All CDE-APP server files (index.ts, github.ts, graph-builder.ts, etc.)
+- **Added**: All REV-BOB server files (index.ts, github.ts, graph-builder.ts, etc.)
 - **Added**: package.json with Node.js dependencies
 - **Added**: tsconfig.json for TypeScript compilation
 - **Kept**: Python FastAPI files (main.py, requirements.txt, api/, agents/, etc.)
@@ -163,7 +163,7 @@ pnpm dev
 
 ---
 
-## 🎨 Frontend Stack (CDE-APP Client)
+## 🎨 Frontend Stack (REV-BOB Client)
 
 ### Core Technologies
 - **React 18.3** - UI library
@@ -184,7 +184,7 @@ pnpm dev
 
 ---
 
-## 🔥 Backend Stack (CDE-APP Server + Python)
+## 🔥 Backend Stack (REV-BOB Server + Python)
 
 ### Node.js/TypeScript
 - **Express 4.18** - Web framework
@@ -363,9 +363,9 @@ FRONTEND_URL=http://localhost:3000
 
 ## 🎓 Learning Resources
 
-### CDE-APP Original Docs
-- See `/cde-app/README.md` for original documentation
-- Review `/cde-app/CODEBASE_WALKTHROUGH.html` for architecture details
+### REV-BOB Original Docs
+- See `/REV-BOB/README.md` for original documentation
+- Review `/REV-BOB/CODEBASE_WALKTHROUGH.html` for architecture details
 
 ### Component Documentation
 - **GraphView2D**: Advanced Sigma.js implementation with ForceAtlas2
@@ -409,11 +409,11 @@ FRONTEND_URL=http://localhost:3000
 ## 🎉 Migration Success!
 
 ### What Changed
-✅ **Frontend**: Replaced Next.js with CDE-APP's Vite + React  
-✅ **Backend**: Added CDE-APP's TypeScript server to existing Python backend  
+✅ **Frontend**: Replaced Next.js with REV-BOB's Vite + React  
+✅ **Backend**: Added REV-BOB's TypeScript server to existing Python backend  
 ✅ **Structure**: Clean monorepo with clear separation  
 ✅ **Scripts**: Simplified dev workflow with concurrent execution  
-✅ **Dependencies**: All CDE-APP dependencies integrated  
+✅ **Dependencies**: All REV-BOB dependencies integrated  
 
 ### What Was Kept
 ✅ **Python Backend**: All FastAPI routes, agents, and services  

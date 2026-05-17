@@ -2,13 +2,13 @@
 
 ## ✅ Status
 
-Frontend sudah jalan, tapi **masih menggunakan Next.js old backup** bukan Vite CDE-APP!
+Frontend sudah jalan, tapi **masih menggunakan Next.js old backup** bukan Vite REV-BOB!
 
 ## 🔍 Diagnosis
 
 1. **Frontend**: Jalan di port 3000 (Next.js dari backup)
 2. **Backend**: Belum jalan (port 3001 kosong)
-3. **CDE-APP Client**: Ada di `/packages/web/` tapi belum digunakan
+3. **REV-BOB Client**: Ada di `/packages/web/` tapi belum digunakan
 
 ## 🛠️ Fix Steps
 
@@ -50,7 +50,7 @@ pnpm backend:dev  # Backend only
 
 ## 🎯 Expected Result
 
-- **Frontend**: Vite server at http://localhost:3000 (CDE-APP interface)
+- **Frontend**: Vite server at http://localhost:3000 (REV-BOB interface)
 - **Backend**: Express server at http://localhost:3001 (TypeScript)
 
 ## 📝 Current Issue

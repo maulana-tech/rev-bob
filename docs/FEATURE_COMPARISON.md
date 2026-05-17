@@ -3,12 +3,12 @@
 ## 📊 Overview
 
 Backend sekarang memiliki **DUA server**:
-1. **TypeScript Server** (CDE-APP) - Port 3001 - **PRIMARY**
+1. **TypeScript Server** (REV-BOB) - Port 3001 - **PRIMARY**
 2. **Python Server** (FastAPI) - Port 8000 - **OPTIONAL**
 
 ---
 
-## ✅ TypeScript Backend (CDE-APP) - Port 3001
+## ✅ TypeScript Backend (REV-BOB) - Port 3001
 
 ### Implemented Endpoints
 
@@ -264,7 +264,7 @@ Update frontend to call correct endpoints based on feature availability.
 
 1. **Already Complete** - All features working
 2. **Multi-LLM** - 7+ providers with fallback
-3. **Production Ready** - Battle-tested CDE-APP code
+3. **Production Ready** - Battle-tested REV-BOB code
 4. **GitHub Integration** - Full OAuth + API
 5. **Well Documented** - Clear code structure
 
