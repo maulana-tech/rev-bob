@@ -1,5 +1,5 @@
 /**
- * CDE AI — Dependency Propagation Canvas
+ * Rev BOB — Dependency Propagation Canvas
  * 
  * WebGL graph renderer using Sigma.js with ForceAtlas2 layout.
  * Visualizes code dependency graphs with blast-radius simulation

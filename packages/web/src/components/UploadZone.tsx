@@ -136,7 +136,7 @@ export default function UploadZone({ onGraph }: UploadZoneProps) {
                 <div className="upload-header-section">
                     <div className="upload-brand">
                         <span className="upload-brand-icon">❖</span>
-                        <span className="upload-brand-text">CDE AI</span>
+                        <span className="upload-brand-text">Rev BOB</span>
                     </div>
                     <div className="upload-header-subtitle">Dependency Propagation Engine</div>
                 </div>

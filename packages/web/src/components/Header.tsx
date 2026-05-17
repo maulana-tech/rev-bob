@@ -36,8 +36,8 @@ export default function Header({
         <header className="header">
             <div className="header-section header-section-left">
                 <div className="header-brand">
-                    <img src="/app/logo.png" alt="CDE AI" className="header-logo" />
-                    <span className="header-brand-wordmark">CDE AI</span>
+                    <img src="/app/logo.png" alt="Rev BOB" className="header-logo" />
+                    <span className="header-brand-wordmark">Rev BOB</span>
                     <span className="header-tagline">dependency propagation engine</span>
                 </div>
 
@@ -71,7 +71,7 @@ export default function Header({
                         <button
                             className={`btn btn-simulation ${vectronMode ? 'active' : ''}`}
                             onClick={onToggleVectron}
-                            title={vectronMode ? 'Disable CDE AI simulation mode' : 'Enable CDE AI simulation mode'}
+                            title={vectronMode ? 'Disable Rev BOB simulation mode' : 'Enable Rev BOB simulation mode'}
                         >
                             <span className="btn-dot" />
                             <span className="btn-label">SIMULATION</span>

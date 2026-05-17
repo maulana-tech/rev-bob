@@ -935,7 +935,7 @@ You MUST respond with ONLY valid JSON, no markdown, no backticks:
         provider,
       });
     } catch (parseErr) {
-      console.error("[CDE AI] AI Parse error:", parseErr, "Raw text:", text);
+      console.error("[Rev BOB] AI Parse error:", parseErr, "Raw text:", text);
       res.json({
         explanation: "Could not analyze codebase response. Please try again.",
         relevantNodes: [],
@@ -984,7 +984,9 @@ INCOMING CONNECTIONS (${incoming.length}): ${incoming.length > 0 ? incoming.join
 OUTGOING CONNECTIONS (${outgoing.length}): ${outgoing.length > 0 ? outgoing.join(", ") : "None"}
 
 Return exactly one sentence with no markdown and no bullets.`;
-    const summary = await callLLM(systemPrompt, userMessage);
+    const summary = await callLLM(systemPrompt, userMessage, {
+      maxTokens: 150,
+    });
     const normalized = summary.content.replace(/\s+/g, " ").trim();
     const sentence = normalized.split(/(?<=[.!?])\s+/)[0] ?? normalized;
 
@@ -1080,7 +1082,7 @@ Rules:
       console.log("Processes detected:", finalProcesses.length);
       res.json({ processes: finalProcesses });
     } catch (parseErr) {
-      console.error("[CDE AI] Process Parse error:", parseErr, "Raw text:", text.content);
+      console.error("[Rev BOB] Process Parse error:", parseErr, "Raw text:", text.content);
       const fallbackProcesses = detectHeuristicProcesses(graphData, minimumSteps, focusNode);
       res.json({ processes: fallbackProcesses });
     }
@@ -1093,7 +1095,7 @@ Rules:
         return;
       }
     } catch (fallbackErr) {
-      console.error("[CDE AI] Heuristic process fallback failed:", fallbackErr);
+      console.error("[Rev BOB] Heuristic process fallback failed:", fallbackErr);
     }
     const message = err instanceof Error ? err.message : "Unknown error";
     res.status(500).json({ error: `Process detection failed: ${message}`, processes: [] });
@@ -1157,6 +1159,7 @@ Be specific, technical, and useful. Write like a senior engineer.`;
       `GRAPH DATA:\n${summary}\n\nEXACT STATS:\n- Total files parsed: ${stats.totalFiles}\n- Total functions detected: ${stats.totalFunctions}\n- Most connected component: ${stats.mostConnectedComponent} (${stats.mostConnectedDegree} connections)\n- Deepest dependency chain: ${stats.deepestDependencyChain} (${stats.deepestDependencyDepth} hops)`,
       {
         primaryTemperature: 0.2,
+        maxTokens: 3000,
       },
     );
 
@@ -1432,12 +1435,12 @@ function collectSourceFilesFromZip(zip: AdmZip): SourceFile[] {
 
   if (skippedOversized > 0 || skippedUnreadable > 0 || skippedByBudget > 0) {
     console.warn(
-      `[CDE AI] ZIP sampled: skipped ${skippedOversized} oversized file(s) ` +
+      `[Rev BOB] ZIP sampled: skipped ${skippedOversized} oversized file(s) ` +
         `(>${MAX_FILE_BYTES / 1024}KB), ${skippedUnreadable} unreadable file(s), and ${skippedByBudget} file(s) due to the parser budget. ` +
         `Processing ${sourceFiles.length} of eligible source files.`,
     );
   } else {
-    console.log(`[CDE AI] Processing ${sourceFiles.length} source file(s).`);
+    console.log(`[Rev BOB] Processing ${sourceFiles.length} source file(s).`);
   }
 
   return sourceFiles;
@@ -1531,7 +1534,7 @@ async function collectSourceFilesFromDirectory(rootDir: string): Promise<SourceF
   }
 
   await walk(rootDir);
-  console.log(`[CDE AI] Processing ${sourceFiles.length} cloned source file(s).`);
+  console.log(`[Rev BOB] Processing ${sourceFiles.length} cloned source file(s).`);
   return sourceFiles;
 }
 
@@ -1616,7 +1619,7 @@ app.post("/api/upload", (req, res) => {
       res.json(processSourceFiles(sourceFiles));
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Unknown error";
-      console.error("[CDE AI] Upload error:", message);
+      console.error("[Rev BOB] Upload error:", message);
       res.status(500).json({ error: `Processing failed: ${message}` });
     }
   });
@@ -1650,7 +1653,7 @@ app.post("/api/clone", async (req, res) => {
     }
 
     const message = error instanceof Error ? error.message : "Unknown error";
-    console.error("[CDE AI] Clone error:", message);
+    console.error("[Rev BOB] Clone error:", message);
     res.status(500).json({ error: `Processing failed: ${message}` });
   }
 });
@@ -1669,7 +1672,7 @@ app.use((err: unknown, _req: express.Request, res: express.Response, _next: expr
   }
 
   const message = err instanceof Error ? err.message : "Unknown upload error";
-  console.error("[CDE AI] Unhandled server error:", message);
+  console.error("[Rev BOB] Unhandled server error:", message);
   res.status(500).json({ error: `Processing failed: ${message}` });
 });
 
@@ -2020,7 +2023,7 @@ Respond with JSON only (no other text):
 
     const improvedResult = await callLLM(systemPrompt, fileContentStr);
     let improvedCode = improvedResult.content;
-    let explanation = "Code refactored by CDE AI";
+    let explanation = "Code refactored by Rev BOB";
 
     try {
       const parsed = JSON.parse(improvedResult.content);
@@ -2042,8 +2045,8 @@ Respond with JSON only (no other text):
       token,
       owner, 
       repo,
-      `CDE AI Refactor: ${instructions.slice(0, 50)}`,
-      `# Refactor Report\n\n**Instructions:** ${instructions}\n\n**File:** ${targetFile.path}\n\n**Explanation:** ${explanation}\n\nThis PR was automatically generated by CDE AI.`,
+      `Rev BOB Refactor: ${instructions.slice(0, 50)}`,
+      `# Refactor Report\n\n**Instructions:** ${instructions}\n\n**File:** ${targetFile.path}\n\n**Explanation:** ${explanation}\n\nThis PR was automatically generated by Rev BOB.`,
       newBranch,
       "main"
     ) as any;
@@ -2075,7 +2078,7 @@ app.use('/api', orchestrateProxyRoutes);
 const portNumber = typeof PORT === 'string' ? parseInt(PORT, 10) : PORT;
 const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
 app.listen(portNumber, host, () => {
-  console.log(`CDE AI server listening on http://${host}:${portNumber}`);
+  console.log(`Rev BOB server listening on http://${host}:${portNumber}`);
   console.log(`DevTools AI Suite routes available at /api/*`);
 });
 

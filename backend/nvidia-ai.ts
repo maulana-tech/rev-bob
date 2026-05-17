@@ -43,34 +43,48 @@ class NvidiaAIClient {
         { role: 'user', content: userPrompt }
       ];
 
-      const response = await fetch(`${this.baseURL}/chat/completions`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: this.model,
-          messages,
-          max_tokens: options.maxTokens || 1024,
-          temperature: options.temperature || 0.7,
-          top_p: 0.9,
-          stream: false,
-        }),
-      });
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 60000); // 60s timeout
 
-      if (!response.ok) {
-        const error = await response.text();
-        throw new Error(`NVIDIA AI API error: ${response.status} - ${error}`);
+      try {
+        const response = await fetch(`${this.baseURL}/chat/completions`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${this.apiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: this.model,
+            messages,
+            max_tokens: options.maxTokens || 2048,
+            temperature: options.temperature || 0.7,
+            top_p: 0.9,
+            stream: false,
+          }),
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeout);
+
+        if (!response.ok) {
+          const error = await response.text();
+          throw new Error(`NVIDIA AI API error: ${response.status} - ${error}`);
+        }
+
+        const data = await response.json() as any;
+
+        if (!data.choices || data.choices.length === 0) {
+          throw new Error('No response from NVIDIA AI');
+        }
+
+        return data.choices[0].message.content;
+      } catch (fetchError: any) {
+        clearTimeout(timeout);
+        if (fetchError.name === 'AbortError') {
+          throw new Error('NVIDIA AI request timed out after 60 seconds');
+        }
+        throw fetchError;
       }
-
-      const data = await response.json() as any;
-
-      if (!data.choices || data.choices.length === 0) {
-        throw new Error('No response from NVIDIA AI');
-      }
-
-      return data.choices[0].message.content;
     } catch (error: any) {
       console.error('[NVIDIA AI] Error:', error.message);
       throw error;

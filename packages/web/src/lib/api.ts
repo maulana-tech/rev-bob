@@ -37,11 +37,11 @@ async function buildApiError(res: Response): Promise<Error> {
     }
 
     if (res.status === 413) {
-        return new Error(message || 'Repository archive is too large for the current CDE AI upload limit.');
+        return new Error(message || 'Repository archive is too large for the current Rev BOB upload limit.');
     }
 
     if (res.status >= 500 && /internal server error/i.test(message)) {
-        return new Error('CDE AI could not process this repository. Try a smaller ZIP or a repo root without build artifacts.');
+        return new Error('Rev BOB could not process this repository. Try a smaller ZIP or a repo root without build artifacts.');
     }
 
     if (
@@ -49,7 +49,7 @@ async function buildApiError(res: Response): Promise<Error> {
         message.toLowerCase().includes('internal server error') &&
         !(await isLocalBackendReachable())
     ) {
-        return new Error('CDE AI backend is not reachable. Start the server in `vectron-app` and refresh the page.');
+        return new Error('Rev BOB backend is not reachable. Start the server in `vectron-app` and refresh the page.');
     }
 
     return new Error(message || `Server error ${res.status}`);
@@ -60,7 +60,7 @@ async function fetchFromApi(input: RequestInfo | URL, init?: RequestInit): Promi
         return await fetch(input, init);
     } catch (error) {
         if (!(await isLocalBackendReachable())) {
-            throw new Error('CDE AI backend is not reachable. Start the server in `vectron-app` and refresh the page.');
+            throw new Error('Rev BOB backend is not reachable. Start the server in `vectron-app` and refresh the page.');
         }
 
         throw error instanceof Error ? error : new Error('Network request failed');

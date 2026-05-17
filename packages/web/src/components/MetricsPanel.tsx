@@ -54,7 +54,7 @@ export default function MetricsPanel({
                     <div className="panel-label">Simulation</div>
                     <div className="empty-state empty-state-compact">
                         <strong>Simulation is currently off.</strong>
-                        <span>Enable CDE AI simulation mode to analyze blast radius and propagation depth.</span>
+                        <span>Enable Rev BOB simulation mode to analyze blast radius and propagation depth.</span>
                     </div>
                 </div>
             </>

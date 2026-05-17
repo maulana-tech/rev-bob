@@ -14,10 +14,10 @@ const server = new McpServer({
 
 mcpApp.use(express.json());
 
-server.tool("cde-ai_status", "Check if CDE AI has a graph loaded", {}, async () => {
+server.tool("cde-ai_status", "Check if Rev BOB has a graph loaded", {}, async () => {
   if (!hasGraph()) {
     return {
-      content: [{ type: "text", text: "No graph loaded. Upload a ZIP to CDE AI first." }],
+      content: [{ type: "text", text: "No graph loaded. Upload a ZIP to Rev BOB first." }],
     };
   }
 
@@ -319,14 +319,14 @@ mcpApp.post("/messages", async (req, res) => {
 
 export const startMCPServer = () => {
   const server = mcpApp.listen(3002, () => {
-    console.log("[CDE AI MCP] Server running on http://localhost:3002/sse");
+    console.log("[Rev BOB MCP] Server running on http://localhost:3002/sse");
   });
 
   server.on('error', (err: NodeJS.ErrnoException) => {
     if (err.code === 'EADDRINUSE') {
-      console.warn("[CDE AI MCP] Port 3002 already in use, MCP server not started");
+      console.warn("[Rev BOB MCP] Port 3002 already in use, MCP server not started");
     } else {
-      console.error("[CDE AI MCP] Server error:", err);
+      console.error("[Rev BOB MCP] Server error:", err);
     }
   });
 };
