@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { generateReport } from '../lib/api';
 import type { GraphData } from '../types/graph';
 import { useSessionState } from '../hooks/useSessionState';
+import JiraIssueModal from './JiraIssueModal';
 
 interface ReportModalProps {
     graph: GraphData;
@@ -145,6 +146,7 @@ export default function ReportModal({ graph }: ReportModalProps) {
     const [error, setError] = useState<string | null>(null);
     const [copied, setCopied] = useState(false);
     const [loadingStepIndex, setLoadingStepIndex] = useState(0);
+    const [jiraModalOpen, setJiraModalOpen] = useState(false);
 
     useEffect(() => {
         // Don't clear report on graph change, only reset UI state
@@ -225,6 +227,9 @@ export default function ReportModal({ graph }: ReportModalProps) {
 
                     {hasRenderedReport && (
                         <div className="report-actions">
+                            <button className="process-chart-btn" onClick={() => setJiraModalOpen(true)}>
+                                📋 Export to Jira
+                            </button>
                             <button className="process-chart-btn" onClick={handleDownload}>
                                 Download .md
                             </button>
@@ -288,6 +293,13 @@ export default function ReportModal({ graph }: ReportModalProps) {
                     </div>
                 )}
             </div>
+
+            <JiraIssueModal
+                isOpen={jiraModalOpen}
+                onClose={() => setJiraModalOpen(false)}
+                defaultSummary="Codebase Intelligence Report"
+                defaultDescription={report}
+            />
         </div>
     );
 }

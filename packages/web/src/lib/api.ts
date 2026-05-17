@@ -365,3 +365,80 @@ export async function logoutGitHub(): Promise<void> {
         method: 'POST',
     });
 }
+
+// ==================== JIRA INTEGRATION ====================
+
+export interface JiraStatus {
+    configured: boolean;
+    connected: boolean;
+    message: string;
+}
+
+export interface JiraProject {
+    id: string;
+    key: string;
+    name: string;
+    projectTypeKey: string;
+}
+
+export interface CreateJiraIssuePayload {
+    project: string;
+    summary: string;
+    description?: string;
+    issuetype?: string;
+    priority?: string;
+}
+
+export interface JiraIssue {
+    key: string;
+    id: string;
+    fields: {
+        summary: string;
+        status: {
+            name: string;
+        };
+        issuetype: {
+            name: string;
+        };
+    };
+}
+
+export async function getJiraStatus(): Promise<JiraStatus> {
+    const res = await fetchFromApi(`${BASE}/jira/status`, {
+        method: 'GET',
+    });
+
+    if (!res.ok) {
+        throw await buildApiError(res);
+    }
+
+    return res.json();
+}
+
+export async function getJiraProjects(): Promise<{ projects: JiraProject[]; total: number }> {
+    const res = await fetchFromApi(`${BASE}/jira/projects`, {
+        method: 'GET',
+    });
+
+    if (!res.ok) {
+        throw await buildApiError(res);
+    }
+
+    const data = await res.json();
+    return { projects: data.projects || [], total: data.total || 0 };
+}
+
+export async function createJiraIssue(payload: CreateJiraIssuePayload): Promise<JiraIssue> {
+    const res = await fetchFromApi(`${BASE}/jira/issue`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+        throw await buildApiError(res);
+    }
+
+    const data = await res.json();
+    return data.issue;
+}

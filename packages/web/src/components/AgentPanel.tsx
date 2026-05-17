@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { generateAgentAnalysis } from '../lib/api';
 import type { AgentAnalysisResponse, GraphData } from '../types/graph';
 import { useSessionState } from '../hooks/useSessionState';
+import JiraIssueModal from './JiraIssueModal';
 
 interface AgentPanelProps {
     graph: GraphData;
@@ -51,6 +52,8 @@ export default function AgentPanel({ graph }: AgentPanelProps) {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [jiraModalOpen, setJiraModalOpen] = useState(false);
+    const [selectedFinding, setSelectedFinding] = useState<{ summary: string; description: string } | null>(null);
 
     const orderedAgents = useMemo(() => {
         if (!analysis) return [];
@@ -74,6 +77,22 @@ export default function AgentPanel({ graph }: AgentPanelProps) {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleCreateJiraIssue = (agentKey: string, content: string) => {
+        const agent = analysis?.agents[agentKey as keyof AgentAnalysisResponse['agents']];
+        if (!agent) return;
+
+        // Extract first finding/issue from content
+        const lines = content.split('\n');
+        const findingLine = lines.find((line) => /^\d+\.|^-/.test(line.trim()));
+        const summary = findingLine ? findingLine.replace(/^\d+\.\s*|^-\s*/, '').trim() : agent.title;
+
+        setSelectedFinding({
+            summary: `${agent.title}: ${summary}`,
+            description: content,
+        });
+        setJiraModalOpen(true);
     };
 
     if (loading) {
@@ -125,6 +144,16 @@ export default function AgentPanel({ graph }: AgentPanelProps) {
                                         <p key={`${agent.key}-${index}`}>{renderFormattedContent(line)}</p>
                                     ))}
                                 </div>
+                                <div className="agent-card-actions">
+                                    <button
+                                        type="button"
+                                        className="agent-jira-btn"
+                                        onClick={() => handleCreateJiraIssue(agent.key, agent.content)}
+                                        title="Create Jira issue from this finding"
+                                    >
+                                        📋 Create Jira Issue
+                                    </button>
+                                </div>
                             </article>
                         ))}
                     </div>
@@ -137,6 +166,13 @@ export default function AgentPanel({ graph }: AgentPanelProps) {
                         </button>
                     </div>
                 </div>
+
+                <JiraIssueModal
+                    isOpen={jiraModalOpen}
+                    onClose={() => setJiraModalOpen(false)}
+                    defaultSummary={selectedFinding?.summary || ''}
+                    defaultDescription={selectedFinding?.description || ''}
+                />
             </div>
         );
     }
