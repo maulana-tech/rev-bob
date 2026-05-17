@@ -39,6 +39,17 @@ export default function UploadZone({ onGraph }: UploadZoneProps) {
     const canAnalyzeGithub = githubUrl.trim().length > 0 && !isLoading;
 
     useEffect(() => {
+        // Check if redirected from OAuth with token
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('github_token');
+
+        if (token) {
+            console.log('[GitHub Auth] Storing token from OAuth redirect');
+            localStorage.setItem('github_token', token);
+            // Clean URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
         getGitHubUser()
             .then(user => {
                 console.log('[GitHub Auth] User state:', user);

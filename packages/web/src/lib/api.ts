@@ -82,9 +82,16 @@ export async function uploadZip(file: File): Promise<GraphData> {
 }
 
 export async function cloneGithubRepo(githubUrl: string): Promise<GraphData> {
+    const token = localStorage.getItem('github_token');
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
     const res = await fetchFromApi(`${BASE}/clone`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ githubUrl }),
     });
 
@@ -332,19 +339,28 @@ export interface GitHubUser {
 }
 
 export async function getGitHubUser(): Promise<GitHubUser> {
+    const token = localStorage.getItem('github_token');
+    const headers: Record<string, string> = {};
+
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
     const res = await fetchFromApi(`${BASE}/github/me`, {
         method: 'GET',
+        headers,
     });
-    
+
     if (!res.ok) {
         const error = await res.json().catch(() => ({ error: 'Failed to get user' }));
         return { authenticated: false, error: error.error };
     }
-    
+
     return res.json();
 }
 
 export async function logoutGitHub(): Promise<void> {
+    localStorage.removeItem('github_token');
     await fetchFromApi(`${BASE}/github/logout`, {
         method: 'POST',
     });

@@ -1759,13 +1759,16 @@ app.get("/api/github/callback", async (req, res) => {
     }
 
     const accessToken = data.access_token;
+
+    // Store in cookie for same-origin requests
     res.cookie("github_token", accessToken, {
       httpOnly: true,
       maxAge: 30 * 24 * 60 * 60 * 1000,
       sameSite: "lax",
     });
 
-    res.redirect(`${frontendUrl}?logged_in=true`);
+    // Also pass token in URL for cross-origin (frontend can store in localStorage)
+    res.redirect(`${frontendUrl}?logged_in=true&github_token=${accessToken}`);
   } catch (error) {
     console.error("[GitHub OAuth] Error:", error);
     res.redirect(`${frontendUrl}?error=oauth_failed`);
