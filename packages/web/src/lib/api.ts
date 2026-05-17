@@ -1,7 +1,8 @@
 import type { AgentAnalysisResponse, DetectedProcess, GraphData, LLMConfig } from '../types/graph';
 
-const BASE = '/api';
-const HEALTH_ENDPOINT = '/health';
+const API_BASE_URL = 'https://devtoolsbackend-production.up.railway.app';
+const BASE = `${API_BASE_URL}/api`;
+const HEALTH_ENDPOINT = `${API_BASE_URL}/health`;
 
 async function isLocalBackendReachable(): Promise<boolean> {
     try {
