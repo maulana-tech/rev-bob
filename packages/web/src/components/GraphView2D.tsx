@@ -607,8 +607,6 @@ export default function GraphView2D({
 
     sigma.on('clickNode',  ({ node }) => {
       if (!interactiveRef.current) return;
-      const attrs = graph.getNodeAttributes(node);
-      console.log('Clicked node:', attrs.label ?? node);
       clickRef.current(node);
       if (fileViewModeRef.current) {
         fileViewRef.current(node);
