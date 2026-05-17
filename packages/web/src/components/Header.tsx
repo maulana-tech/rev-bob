@@ -38,7 +38,6 @@ export default function Header({
                 <div className="header-brand">
                     <img src="/app/logo.png" alt="Rev BOB" className="header-logo" />
                     <span className="header-brand-wordmark">Rev BOB</span>
-                    <span className="header-tagline">dependency propagation engine</span>
                 </div>
 
                 {hasGraph && (
