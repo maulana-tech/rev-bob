@@ -2047,8 +2047,9 @@ app.use('/api', devtoolsRoutes);
 app.use('/api', orchestrateProxyRoutes);
 
 const portNumber = typeof PORT === 'string' ? parseInt(PORT, 10) : PORT;
-app.listen(portNumber, "127.0.0.1", () => {
-  console.log(`CDE AI server listening on http://127.0.0.1:${portNumber}`);
+const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
+app.listen(portNumber, host, () => {
+  console.log(`CDE AI server listening on http://${host}:${portNumber}`);
   console.log(`DevTools AI Suite routes available at /api/*`);
 });
 
