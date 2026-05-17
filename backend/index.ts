@@ -503,7 +503,7 @@ async function callLLMWithConfig(
 async function callAgentWithFallback(systemPrompt: string, userMessage: string): Promise<string> {
   const fallback = await callLLM(systemPrompt, userMessage, {
     primaryTemperature: 0.2,
-    maxTokens: 1024,
+    maxTokens: 2000,
   });
   return fallback.content;
 }
@@ -1183,85 +1183,42 @@ app.post("/api/agent-analysis", async (req, res) => {
   try {
     const graphSummary = `GRAPH DATA:\n${buildCompactGraphSummary(graphData)}`;
 
-    const securityPrompt = `You are a senior security engineer analyzing a codebase knowledge graph. Identify security concerns including:
-- Exposed API endpoints with no apparent auth
-- Functions that handle user input (potential injection points)
-- Authentication and authorization patterns
-- Dependency on external services (attack surface)
-- Hardcoded values or config exposure risks
+    const securityPrompt = `Analyze security risks in this codebase graph. Identify: exposed endpoints, input handlers (injection risk), auth patterns, external dependencies, hardcoded secrets.
 
-Be specific. Reference actual node names from the graph.
-Format your response as:
+Format:
 RISK LEVEL: HIGH/MEDIUM/LOW
-FINDINGS:
-1. [finding with specific node name]
-2. [finding with specific node name]
-RECOMMENDATIONS:
-1. [specific actionable recommendation]`;
+FINDINGS: (max 5, reference actual node names)
+RECOMMENDATIONS: (max 3 actionable items)`;
 
-    const architecturePrompt = `You are a senior software architect analyzing a codebase knowledge graph. Analyze the architectural quality including:
-- Circular dependencies between modules
-- Coupling and cohesion between components
-- Separation of concerns violations
-- God objects or files with too many responsibilities
-- Module boundary violations
+    const architecturePrompt = `Assess architecture quality: circular dependencies, coupling/cohesion, separation of concerns, god objects, module boundaries.
 
-Be specific. Reference actual node names from the graph.
-Format your response as:
-ARCHITECTURE SCORE: X/10
-FINDINGS:
-1. [finding with specific node name]
-RECOMMENDATIONS:
-1. [specific actionable recommendation]`;
+Format:
+SCORE: X/10
+FINDINGS: (max 5, reference nodes)
+RECOMMENDATIONS: (max 3)`;
 
-    const performancePrompt = `You are a performance engineering expert analyzing a codebase knowledge graph. Identify performance concerns including:
-- Hot paths (most called functions based on edge count)
-- Potential bottlenecks (high in-degree nodes)
-- Functions called in loops or render cycles
-- Heavy dependency chains that add latency
+    const performancePrompt = `Identify performance issues: hot paths (most called), bottlenecks (high in-degree), loop calls, heavy dependency chains.
 
-Be specific. Reference actual node names from the graph.
-Format your response as:
-PERFORMANCE SCORE: X/10
-HOT PATHS:
-1. [node name] - called by N nodes
-BOTTLENECKS:
-1. [specific concern]
-RECOMMENDATIONS:
-1. [specific actionable recommendation]`;
+Format:
+SCORE: X/10
+HOT PATHS: (max 5 nodes with call count)
+BOTTLENECKS: (max 3)
+RECOMMENDATIONS: (max 3)`;
 
-    const qualityPrompt = `You are a code quality expert analyzing a codebase knowledge graph. Assess code quality including:
-- Dead code (nodes with zero incoming edges)
-- Overly connected functions (god functions)
-- Naming convention consistency
-- Test coverage gaps (functions with no test-related callers)
-- Code duplication patterns
+    const qualityPrompt = `Assess code quality: dead code (zero incoming edges), god functions (too many connections), naming consistency, test gaps.
 
-Be specific. Reference actual node names from the graph.
-Format your response as:
-QUALITY SCORE: X/10
-ISSUES FOUND:
-1. [issue with specific node name]
-DEAD CODE CANDIDATES:
-1. [node name]
-RECOMMENDATIONS:
-1. [specific actionable recommendation]`;
+Format:
+SCORE: X/10
+ISSUES: (max 5, reference nodes)
+DEAD CODE: (max 3 candidates)
+RECOMMENDATIONS: (max 3)`;
 
-    const onboardingPrompt = `You are a senior developer creating an onboarding guide for a new developer joining this codebase. Based on the knowledge graph:
-- Identify the 5 most important files to read first
-- Explain the core data flow in plain English
-- Identify the main entry points
-- Explain what each major module does
-- Suggest a learning path
+    const onboardingPrompt = `Create onboarding guide: top 5 files to read first, core data flow (plain English), main entry points, major modules.
 
-Be specific. Reference actual node names from the graph.
-Format your response as:
-START HERE:
-1. [file name] - [why]
-CORE DATA FLOW:
-[plain english explanation]
-LEARNING PATH:
-1. [step]`;
+Format:
+START HERE: (5 files with why)
+DATA FLOW: (2-3 sentences)
+LEARNING PATH: (5 steps)`;
 
     const [security, architecture, performance, quality, onboarding] =
       await Promise.all([

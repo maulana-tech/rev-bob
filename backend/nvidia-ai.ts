@@ -44,7 +44,7 @@ class NvidiaAIClient {
       ];
 
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 60000); // 60s timeout
+      const timeout = setTimeout(() => controller.abort(), 120000); // 120s timeout
 
       try {
         const response = await fetch(`${this.baseURL}/chat/completions`, {
@@ -81,7 +81,7 @@ class NvidiaAIClient {
       } catch (fetchError: any) {
         clearTimeout(timeout);
         if (fetchError.name === 'AbortError') {
-          throw new Error('NVIDIA AI request timed out after 60 seconds');
+          throw new Error('NVIDIA AI request timed out after 120 seconds');
         }
         throw fetchError;
       }
