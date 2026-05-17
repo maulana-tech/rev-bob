@@ -922,6 +922,7 @@ router.get('/jira/status', async (_req, res) => {
     res.json({
       configured: true,
       connected,
+      host: process.env.JIRA_HOST,
       message: connected
         ? 'Jira is configured and accessible'
         : 'Jira is configured but connection failed',

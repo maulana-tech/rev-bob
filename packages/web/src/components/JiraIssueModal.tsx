@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { getJiraStatus, getJiraProjects, createJiraIssue, type CreateJiraIssuePayload, type JiraProject } from '../lib/api';
 
 interface JiraIssueModalProps {
@@ -12,8 +13,10 @@ export default function JiraIssueModal({ isOpen, onClose, defaultSummary = '', d
     const [loading, setLoading] = useState(false);
     const [projects, setProjects] = useState<JiraProject[]>([]);
     const [configured, setConfigured] = useState(false);
+    const [jiraHost, setJiraHost] = useState<string>('');
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
+    const [createdIssue, setCreatedIssue] = useState<{ key: string; url: string } | null>(null);
 
     const [formData, setFormData] = useState<CreateJiraIssuePayload>({
         project: '',
@@ -41,6 +44,7 @@ export default function JiraIssueModal({ isOpen, onClose, defaultSummary = '', d
         try {
             const status = await getJiraStatus();
             setConfigured(status.configured && status.connected);
+            setJiraHost(status.host || 'https://devtool-test.atlassian.net');
 
             if (status.configured && status.connected) {
                 const { projects: projectList } = await getJiraProjects();
@@ -60,14 +64,20 @@ export default function JiraIssueModal({ isOpen, onClose, defaultSummary = '', d
         setLoading(true);
         setError(null);
         setSuccess(null);
+        setCreatedIssue(null);
 
         try {
             const issue = await createJiraIssue(formData);
-            setSuccess(`Issue created: ${issue.key}`);
+            const issueUrl = `${jiraHost}/browse/${issue.key}`;
+
+            setCreatedIssue({ key: issue.key, url: issueUrl });
+            setSuccess(`Issue ${issue.key} created successfully!`);
+
             setTimeout(() => {
                 onClose();
                 setSuccess(null);
-            }, 2000);
+                setCreatedIssue(null);
+            }, 5000);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to create Jira issue');
         } finally {
@@ -77,7 +87,7 @@ export default function JiraIssueModal({ isOpen, onClose, defaultSummary = '', d
 
     if (!isOpen) return null;
 
-    return (
+    return createPortal(
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content jira-modal" onClick={(e) => e.stopPropagation()}>
                 <div className="modal-header">
@@ -173,7 +183,21 @@ export default function JiraIssueModal({ isOpen, onClose, defaultSummary = '', d
                         </div>
 
                         {error && <div className="jira-error">{error}</div>}
-                        {success && <div className="jira-success">{success}</div>}
+                        {success && (
+                            <div className="jira-success">
+                                {success}
+                                {createdIssue && (
+                                    <a
+                                        href={createdIssue.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="jira-success-link"
+                                    >
+                                        View {createdIssue.key} in Jira →
+                                    </a>
+                                )}
+                            </div>
+                        )}
 
                         <div className="modal-actions">
                             <button type="button" onClick={onClose} className="btn-secondary" disabled={loading}>
@@ -186,6 +210,7 @@ export default function JiraIssueModal({ isOpen, onClose, defaultSummary = '', d
                     </form>
                 )}
             </div>
-        </div>
+        </div>,
+        document.body
     );
 }

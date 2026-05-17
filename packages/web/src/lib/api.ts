@@ -371,6 +371,7 @@ export async function logoutGitHub(): Promise<void> {
 export interface JiraStatus {
     configured: boolean;
     connected: boolean;
+    host?: string;
     message: string;
 }
 
