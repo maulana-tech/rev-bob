@@ -39,7 +39,15 @@ export default function UploadZone({ onGraph }: UploadZoneProps) {
     const canAnalyzeGithub = githubUrl.trim().length > 0 && !isLoading;
 
     useEffect(() => {
-        getGitHubUser().then(setGithubUser).catch(() => setGithubUser({ authenticated: false }));
+        getGitHubUser()
+            .then(user => {
+                console.log('[GitHub Auth] User state:', user);
+                setGithubUser(user);
+            })
+            .catch(err => {
+                console.log('[GitHub Auth] Not authenticated:', err);
+                setGithubUser({ authenticated: false });
+            });
     }, []);
 
     useEffect(() => {

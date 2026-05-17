@@ -1773,10 +1773,10 @@ app.get("/api/github/callback", async (req, res) => {
 });
 
 app.get("/api/github/me", async (req, res) => {
-  const token = req.headers.authorization?.replace("Bearer ", "") || req.cookies.github_token || process.env.GITHUB_TOKEN;
-  
+  const token = req.headers.authorization?.replace("Bearer ", "") || req.cookies.github_token;
+
   if (!token) {
-    res.status(401).json({ error: "Not authenticated", authenticated: false });
+    res.json({ authenticated: false });
     return;
   }
   
