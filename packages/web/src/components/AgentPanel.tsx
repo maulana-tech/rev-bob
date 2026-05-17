@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { generateAgentAnalysis } from '../lib/api';
 import type { AgentAnalysisResponse, GraphData } from '../types/graph';
+import { useSessionState } from '../hooks/useSessionState';
 
 interface AgentPanelProps {
     graph: GraphData;
@@ -44,8 +45,11 @@ function renderFormattedContent(content: string) {
 }
 
 export default function AgentPanel({ graph }: AgentPanelProps) {
+    // Use sessionStorage for agent analysis persistence
+    const graphKey = `${graph.nodes.length}-${graph.edges.length}`;
+    const [analysis, setAnalysis] = useSessionState<AgentAnalysisResponse | null>(`agents-${graphKey}`, null);
+
     const [loading, setLoading] = useState(false);
-    const [analysis, setAnalysis] = useState<AgentAnalysisResponse | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     const orderedAgents = useMemo(() => {

@@ -36,7 +36,8 @@ export default function Header({
         <header className="header">
             <div className="header-section header-section-left">
                 <div className="header-brand">
-                    <span className="header-brand-wordmark">Rev BOB</span>
+                    <div className="nav-brand-icon">❖</div>
+                    <span className="nav-brand">Rev BOB</span>
                 </div>
 
                 {hasGraph && (

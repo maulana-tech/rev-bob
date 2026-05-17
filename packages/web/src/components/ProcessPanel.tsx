@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import mermaid from 'mermaid';
 import { detectProcesses } from '../lib/api';
 import type { DetectedProcess, GraphData } from '../types/graph';
+import { useSessionState } from '../hooks/useSessionState';
 
 mermaid.initialize({
     startOnLoad: false,
@@ -52,7 +53,11 @@ interface ProcessPanelProps {
 }
 
 export default function ProcessPanel({ graph, selectedNode = null }: ProcessPanelProps) {
-    const [processes, setProcesses] = useState<DetectedProcess[]>([]);
+    // Use sessionStorage for processes persistence
+    const graphKey = `${graph.nodes.length}-${graph.edges.length}`;
+    const focusKey = selectedNode ? `-focus-${selectedNode}` : '';
+    const [processes, setProcesses] = useSessionState<DetectedProcess[]>(`processes-${graphKey}${focusKey}`, []);
+
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);

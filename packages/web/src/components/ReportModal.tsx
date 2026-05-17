@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { generateReport } from '../lib/api';
 import type { GraphData } from '../types/graph';
+import { useSessionState } from '../hooks/useSessionState';
 
 interface ReportModalProps {
     graph: GraphData;
@@ -136,14 +137,17 @@ function renderMarkdown(report: string) {
 }
 
 export default function ReportModal({ graph }: ReportModalProps) {
+    // Use sessionStorage for report persistence across tab switches
+    const graphKey = `${graph.nodes.length}-${graph.edges.length}`;
+    const [report, setReport] = useSessionState<string>(`report-${graphKey}`, '');
+
     const [loading, setLoading] = useState(false);
-    const [report, setReport] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [copied, setCopied] = useState(false);
     const [loadingStepIndex, setLoadingStepIndex] = useState(0);
 
     useEffect(() => {
-        setReport('');
+        // Don't clear report on graph change, only reset UI state
         setError(null);
         setCopied(false);
         setLoading(false);
