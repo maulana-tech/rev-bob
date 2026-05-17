@@ -828,7 +828,13 @@ function resolveGraphData(fallbackGraph?: GraphData | null): GraphData | null {
 }
 
 app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:5173"],
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "https://rev-bob.vercel.app",
+    "https://rev-bob-lanaas-projects.vercel.app",
+    "https://rev-ck2qfgbge-lanaas-projects.vercel.app"
+  ],
   credentials: true
 }));
 app.use(express.json({ limit: "500mb" }));
